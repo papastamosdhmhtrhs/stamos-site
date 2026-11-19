@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D. STAMOS & CO. | Ιδιωτική Χρηματοοικονομική Πλατφόρμα</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #090b10;
+      color: #f3f4f6;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+    }
+    .container { max-width: 1050px; margin: 0 auto; padding: 0 24px; }
+    header {
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(212, 175, 85, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #d4af55;
+    }
+    .badge {
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #d4af55;
+      border: 1px solid rgba(212, 175, 85, 0.4);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .hero {
+      padding: 90px 0 70px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 span { color: #d4af55; }
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto 36px;
+      color: #9ca3af;
+      font-size: 1.1rem;
+    }
+    .waitlist-box {
+      background: #11151f;
+      border: 1px solid rgba(212, 175, 85, 0.35);
+      border-radius: 14px;
+      padding: 28px;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .waitlist-box form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .waitlist-box input, .waitlist-box select {
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid #262d3d;
+      background: #090b10;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .waitlist-box button {
+      padding: 15px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(135deg, #d4af55, #b58e36);
+      color: #090b10;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+    }
+    .waitlist-box button:hover { opacity: 0.92; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 60px 0;
+    }
+    .card {
+      background: #11151f;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .card h3 { color: #d4af55; margin-bottom: 10px; font-size: 1.15rem; }
+    .card p { color: #9ca3af; font-size: 0.96rem; }
+    .card-preview {
+      margin: 70px auto;
+      max-width: 380px;
+      height: 225px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #161b26 0%, #07090d 100%);
+      border: 1px solid rgba(212, 175, 85, 0.55);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    }
+    .card-top { display: flex; justify-content: space-between; align-items: center; }
+    .chip { width: 42px; height: 30px; border-radius: 6px; background: linear-gradient(135deg, #e6c675, #9c7828); }
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 36px 0;
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.82rem;
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">D. STAMOS &amp; CO.</div>
+      <div class="badge">Private Early Access</div>
+    </header>
+
+    <section class="hero">
+      <h1>Η νέα εποχή στην <span>ταχύτητα</span> και τη <span>ρευστότητα</span>.</h1>
+      <p>
+        Ξέχνα τις αργές διαδικασίες, τις ουρές και τα ψιλά γράμματα. 
+        Η πλατφόρμα <strong>D. Stamos &amp; Co.</strong> σχεδιάζεται για επαγγελματίες, επιχειρήσεις και ιδιώτες 
+        που απαιτούν άμεση κίνηση κεφαλαίων, καθαρούς όρους και πραγματικό όφελος σε κάθε συναλλαγή.
+      </p>
+
+      <div class="waitlist-box">
+        <form onsubmit="event.preventDefault(); document.getElementById('msg').style.display='block';">
+          <input type="text" placeholder="Ονοματεπώνυμο" required />
+          <input type="email" placeholder="Email επικοινωνίας" required />
+          <select>
+            <option value="business">Επαγγελματίας / Επιχείρηση</option>
+            <option value="individual">Ιδιώτης</option>
+          </select>
+          <button type="submit">ΖΗΤΗΣΕ ΠΡΟΣΚΛΗΣΗ ΠΡΟΤΕΡΑΙΟΤΗΤΑΣ</button>
+        </form>
+        <p id="msg" style="display:none; color:#d4af55; margin-top:14px; font-size:0.95rem;">
+          Η αίτησή σου καταχωρήθηκε στη λίστα προτεραιότητας του D. Stamos &amp; Co.
+        </p>
+      </div>
+    </section>
+
+    <div class="card-preview">
+      <div class="card-top">
+        <span style="color:#d4af55; font-weight:700; letter-spacing:2px;">D. STAMOS &amp; CO.</span>
+        <span style="color:#9ca3af; font-size:0.75rem; letter-spacing:1px;">FOUNDER EDITION</span>
+      </div>
+      <div class="chip"></div>
+      <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+        <span style="color:#9ca3af; font-size:0.8rem; letter-spacing:2px;">PRIVATE MEMBER</span>
+        <span style="color:#d4af55; font-size:0.85rem;">PLATINUM</span>
+      </div>
+    </div>
+
+    <section class="grid">
+      <div class="card">
+        <h3>01. Άμεση Ρευστότητα</h3>
+        <p>Λύση για επαγγελματίες και επιχειρήσεις που δεν αντέχουν να περιμένουν εβδομάδες για να κινηθεί το ταμείο τους.</p>
+      </div>
+      <div class="card">
+        <h3>02. Επιστροφή Αξίας</h3>
+        <p>Έξυπνο δίκτυο συνεργασιών όπου μέρος των συναλλαγών επιστρέφει απευθείας στον χρήστη, χωρίς κρυφές παγίδες.</p>
+      </div>
+      <div class="card">
+        <h3>03. Ανθρώπινη Εξυπηρέτηση</h3>
+        <p>Άμεση επικοινωνία με εξειδικευμένη ομάδα όταν χρειάζεσαι λύση — όχι ατέρμονα αυτοματοποιημένα μηνύματα.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p><strong>D. STAMOS &amp; CO.</strong> — Πλατφόρμα υπό ανάπτυξη (Pre-Launch / Waitlist).</p>
+      <p style="margin-top:6px;">
+        Σημείωση: Η παρούσα ιστοσελίδα αποτελεί παρουσίαση υπό σχεδιασμό και λίστα εκδήλωσης ενδιαφέροντος. 
+        Δεν παρέχονται ακόμη τραπεζικές ή επενδυτικές υπηρεσίες έως την ολοκλήρωση των απαιτούμενων αδειοδοτήσεων.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
