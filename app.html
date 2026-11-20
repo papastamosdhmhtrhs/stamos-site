@@ -3,813 +3,745 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>D. STAMOS & CO. | Private Wealth & Capital Architecture</title>
+  <title>D. STAMOS & CO. | Client Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #07080a;
-      --bg-secondary: #0d0f13;
-      --bg-card: #11141a;
+      --bg-primary: #060709;
+      --bg-secondary: #0c0e13;
+      --bg-card: #11141c;
       --border-subtle: rgba(212, 175, 55, 0.16);
-      --border-strong: rgba(212, 175, 55, 0.42);
+      --border-strong: rgba(212, 175, 55, 0.46);
       --gold: #d4af37;
-      --gold-light: #f1d882;
-      --text-primary: #f4f5f7;
-      --text-secondary: #9ca3af;
-      --text-muted: #6b7280;
+      --gold-light: #f4df92;
+      --text-primary: #f6f7f9;
+      --text-secondary: #9ea6b2;
+      --text-muted: #67707d;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: var(--bg-primary);
+      background: var(--bg-primary);
       color: var(--text-primary);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      line-height: 1.55;
+      padding-bottom: 48px;
+      position: relative;
       overflow-x: hidden;
     }
 
-    /* Navigation */
+    .bull-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bull-backdrop svg {
+      width: min(92vw, 900px);
+      height: auto;
+      opacity: 0.04;
+    }
+
+    header, main { position: relative; z-index: 1; }
+
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 8, 10, 0.88);
-      backdrop-filter: blur(14px);
+      background: rgba(6, 7, 9, 0.92);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    .nav-container {
-      max-width: 1180px;
+    .topbar {
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 16px 20px;
+      padding: 14px 18px;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 3px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .back-link:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    .portal-brand { text-align: center; }
+
+    .portal-brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+
+    .portal-brand-sub {
+      font-size: 0.56rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .status-pill {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      border: 1px solid var(--border-strong);
+      background: rgba(212, 175, 55, 0.08);
+      padding: 6px 10px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 24px 18px 0; }
+
+    .sync-banner {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.12), rgba(17, 20, 28, 0.92));
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      padding: 16px 18px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
     }
 
-    .brand {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-    }
+    .sync-banner p { font-size: 0.85rem; color: var(--text-secondary); }
+    .sync-banner strong { color: var(--gold-light); }
 
-    .brand-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      color: var(--text-primary);
-    }
-
-    .brand-sub {
-      font-size: 0.62rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-top: 2px;
-    }
-
-    .nav-links {
-      display: none;
-      gap: 28px;
-    }
-
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.82rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--gold-light);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-portal {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 14px;
-      border: 1px solid var(--border-strong);
-      background: rgba(212, 175, 55, 0.08);
-      color: var(--gold-light);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 3px;
-      transition: all 0.25s ease;
-    }
-
-    .btn-portal:hover {
-      background: var(--gold);
-      color: #07080a;
-    }
-
-    /* Hero Section */
-    .hero {
-      position: relative;
-      padding: 72px 20px 64px;
-      background:
-        radial-gradient(circle at 80% 15%, rgba(212, 175, 55, 0.09), transparent 45%),
-        radial-gradient(circle at 15% 85%, rgba(212, 175, 55, 0.05), transparent 40%),
-        var(--bg-primary);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 0.7rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid var(--border-subtle);
-      padding: 6px 12px;
-      border-radius: 2px;
-      margin-bottom: 24px;
-      background: rgba(212, 175, 55, 0.04);
-    }
-
-    h1 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(2rem, 5.2vw, 3.6rem);
+    .btn-gold {
+      padding: 10px 16px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold) 52%, #a9821b 100%);
+      color: #060709;
       font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: 0.03em;
-      max-width: 860px;
-      margin-bottom: 22px;
-    }
-
-    h1 span {
-      color: var(--gold-light);
-    }
-
-    .hero-desc {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      max-width: 640px;
-      margin-bottom: 34px;
-      font-weight: 300;
-    }
-
-    .hero-cta-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 52px;
-    }
-
-    .btn-primary {
-      padding: 14px 26px;
-      background: linear-gradient(135deg, var(--gold), #b89124);
-      color: #07080a;
-      font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       text-decoration: none;
       border: none;
       border-radius: 3px;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    .btn-secondary {
-      padding: 14px 26px;
-      background: transparent;
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      font-weight: 500;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
+    .tab-btn {
+      padding: 10px 15px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-secondary);
       border-radius: 3px;
-      transition: border-color 0.2s, color 0.2s;
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
     }
 
-    .btn-secondary:hover {
+    .tab-btn.active {
+      background: rgba(212, 175, 55, 0.14);
       border-color: var(--gold);
       color: var(--gold-light);
     }
 
-    /* Institutional Metrics Strip */
-    .metrics-strip {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border-subtle);
-    }
+    .panel { display: none; }
+    .panel.active { display: block; }
 
-    .metric-item {
-      padding: 12px 0;
-    }
-
-    .metric-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .metric-value {
-      font-family: 'Cinzel', serif;
-      font-size: 1.15rem;
-      color: var(--text-primary);
-      letter-spacing: 0.05em;
-    }
-
-    /* Sections */
-    section {
-      padding: 68px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .section-header {
-      margin-bottom: 40px;
-    }
-
-    .section-kicker {
-      font-size: 0.7rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      margin-bottom: 12px;
-    }
-
-    .section-sub {
-      color: var(--text-secondary);
-      max-width: 620px;
-      font-size: 0.95rem;
-      font-weight: 300;
-    }
-
-    /* Pillars Grid (GSAM + JPM Style) */
-    .pillars-grid {
+    .overview-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 22px;
+      margin-bottom: 24px;
     }
 
-    .pillar-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      padding: 28px 24px;
-      border-radius: 4px;
-      transition: border-color 0.25s;
-    }
-
-    .pillar-card:hover {
-      border-color: var(--border-strong);
-    }
-
-    .pillar-num {
-      font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
-      color: var(--gold);
-      letter-spacing: 0.15em;
-      margin-bottom: 14px;
-    }
-
-    .pillar-card h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.15rem;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .pillar-card p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 300;
-    }
-
-    /* Digital Desk & Founder Card Preview (BankPro Style) */
-    .desk-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
+    .card-stage {
+      display: flex;
+      flex-direction: column;
       align-items: center;
     }
 
-    .founder-card-visual {
-      background: linear-gradient(145deg, #17191f 0%, #090a0d 60%, #1a150b 100%);
-      border: 1px solid var(--border-strong);
-      border-radius: 14px;
-      padding: 28px 24px;
-      max-width: 420px;
+    .card-3d-scene {
       width: 100%;
-      margin: 0 auto;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+      max-width: 390px;
+      aspect-ratio: 1.586 / 1;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .card-3d-inner {
+      width: 100%;
+      height: 100%;
       position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: 14px;
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 14px;
+      padding: 20px 22px;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      box-shadow: 0 22px 54px rgba(0,0,0,0.88), inset 0 1px 0 rgba(255,255,255,0.18);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       overflow: hidden;
     }
 
-    .founder-card-visual::after {
+    .card-front {
+      background:
+        linear-gradient(125deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 45%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.014) 0px, rgba(255,255,255,0.014) 1px, transparent 1px, transparent 3px),
+        linear-gradient(145deg, #181b22 0%, #090a0e 56%, #19140a 100%);
+    }
+
+    .card-front::before {
       content: "";
       position: absolute;
-      top: -40%;
-      right: -20%;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.18), transparent 70%);
+      inset: 0;
+      background: radial-gradient(circle at 86% 18%, rgba(212, 175, 55, 0.24), transparent 52%);
       pointer-events: none;
     }
 
-    .card-top {
+    .card-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(145deg, #13151b 0%, #07080b 65%, #161108 100%);
+      padding: 0;
+    }
+
+    .mag-stripe {
+      height: 36px;
+      width: 100%;
+      margin-top: 16px;
+      background: repeating-linear-gradient(180deg, #191c22 0px, #0c0d10 4px, #22262e 6px, #090a0d 10px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .card-back-body {
+      padding: 14px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    .sig-band {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.24);
+      border-radius: 3px;
+      padding: 7px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 36px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold-light);
+      letter-spacing: 0.14em;
     }
+
+    .card-top, .card-mid, .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-bottom { align-items: flex-end; }
 
     .card-issuer {
       font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
+      font-size: 0.86rem;
+      font-weight: 700;
       letter-spacing: 0.18em;
       color: var(--gold-light);
     }
 
     .card-tier {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      font-size: 0.56rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--text-secondary);
-      border: 1px solid var(--border-subtle);
-      padding: 4px 8px;
+      color: var(--gold);
+      border: 1px solid rgba(212, 175, 55, 0.36);
+      padding: 3px 8px;
       border-radius: 2px;
+      background: rgba(0, 0, 0, 0.4);
     }
 
     .card-chip {
-      width: 40px;
-      height: 28px;
+      width: 38px;
+      height: 27px;
       border-radius: 5px;
-      background: linear-gradient(135deg, #e7c96b, #9c7a1c);
-      margin-bottom: 28px;
-      opacity: 0.9;
+      background: linear-gradient(135deg, #f3dc8b 0%, #c89f32 55%, #8c6a15 100%);
+      border: 1px solid rgba(255, 245, 204, 0.48);
+      position: relative;
     }
 
-    .card-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+    .card-chip::after {
+      content: "";
+      position: absolute;
+      inset: 5px 8px;
+      border: 1px solid rgba(6, 7, 9, 0.38);
+      border-radius: 2px;
+    }
+
+    .card-serial {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: rgba(246, 247, 249, 0.62);
+    }
+
+    .card-holder-label {
+      font-size: 0.52rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
     }
 
     .card-holder {
       font-size: 0.78rem;
-      letter-spacing: 0.18em;
+      font-weight: 500;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--text-primary);
     }
 
     .card-jurisdiction {
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      color: var(--gold);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      color: var(--gold-light);
       text-transform: uppercase;
     }
 
-    .feature-list {
-      list-style: none;
-      margin: 22px 0 28px;
-    }
-
-    .feature-list li {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--text-secondary);
-      font-size: 0.92rem;
+    .card-controls {
+      margin-top: 10px;
       display: flex;
-      justify-content: space-between;
-      gap: 12px;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .feature-list li strong {
-      color: var(--text-primary);
-      font-weight: 500;
+    .btn-flip {
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-strong);
+      color: var(--gold-light);
+      padding: 5px 10px;
+      border-radius: 2px;
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
     }
 
-    /* Footprint & Access Form */
-    .access-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-
-    .office-box {
-      background: var(--bg-secondary);
+    .box {
+      background: rgba(17, 20, 28, 0.9);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--border-subtle);
-      padding: 28px 24px;
       border-radius: 4px;
+      padding: 22px 20px;
+      margin-bottom: 18px;
     }
 
-    .office-box h3 {
+    .box-kicker {
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .box h3 {
       font-family: 'Cinzel', serif;
       font-size: 1.15rem;
       margin-bottom: 12px;
-      color: var(--gold-light);
     }
 
-    .office-meta {
-      margin-top: 20px;
-      padding-top: 18px;
-      border-top: 1px solid var(--border-subtle);
-      font-size: 0.85rem;
-      color: var(--text-secondary);
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
     }
 
-    .office-meta div {
-      margin-bottom: 8px;
+    .stat-tile {
+      background: var(--bg-secondary);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 14px;
+      border-radius: 3px;
     }
 
-    .form-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-strong);
-      padding: 28px 24px;
-      border-radius: 4px;
+    .stat-tile span {
+      display: block;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
     }
 
-    .form-group {
-      margin-bottom: 16px;
+    .stat-tile strong {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      color: var(--text-primary);
     }
 
+    .invite-row { display: flex; gap: 8px; margin-top: 10px; }
+
+    input, select {
+      width: 100%;
+      padding: 11px 13px;
+      background: #060709;
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--text-primary);
+      border-radius: 3px;
+      font-family: inherit;
+      font-size: 0.88rem;
+    }
+
+    input:focus, select:focus { outline: none; border-color: var(--gold); }
+
+    .form-group { margin-bottom: 14px; }
     label {
       display: block;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-secondary);
       margin-bottom: 6px;
     }
 
-    input, select {
-      width: 100%;
-      padding: 12px 14px;
-      background: #07080a;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: var(--text-primary);
-      border-radius: 3px;
-      font-family: inherit;
-      font-size: 0.92rem;
-    }
-
-    input:focus, select:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
-
-    .form-status {
-      margin-top: 14px;
-      font-size: 0.85rem;
+    .code-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
       color: var(--gold-light);
-      display: none;
-      padding: 10px 12px;
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid var(--border-subtle);
+      background: #060709;
+      border: 1px dashed var(--border-strong);
+      padding: 14px;
+      text-align: center;
       border-radius: 3px;
+      margin: 12px 0;
     }
 
-    /* Footer */
-    footer {
-      padding: 42px 20px 54px;
-      background: #050608;
+    .disclosure-bar {
+      margin-top: 26px;
+      padding: 16px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.74rem;
       color: var(--text-muted);
-      font-size: 0.78rem;
-    }
-
-    .footer-top {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      margin-bottom: 20px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      color: var(--gold-light);
-    }
-
-    .disclosure {
-      line-height: 1.65;
-      max-width: 920px;
+      line-height: 1.6;
     }
 
     @media (min-width: 768px) {
-      .nav-links {
-        display: flex;
-      }
-      .metrics-strip {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .pillars-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .desk-layout {
-        grid-template-columns: 1fr 1fr;
-      }
-      .access-grid {
-        grid-template-columns: 1fr 1.2fr;
-      }
-      .footer-top {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
+      .overview-grid { grid-template-columns: 1fr 1.15fr; align-items: center; }
     }
   </style>
 </head>
 <body>
 
+  <div class="bull-backdrop" aria-hidden="true">
+    <svg viewBox="0 0 800 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M128 332C146 286 184 252 232 234L296 210C356 188 424 176 492 174L568 150C596 140 622 122 642 98L668 68C675 60 688 64 686 75L678 118L724 114C734 113 738 126 729 132L688 158C698 178 696 204 680 220L654 246C634 266 604 276 574 274L542 272L526 392C524 404 508 405 505 393L482 302H346L318 394C314 405 298 404 296 392L284 306L212 378C204 386 190 381 191 370L198 312L144 352C134 359 123 345 128 332Z" stroke="#d4af37" stroke-width="3.5" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
   <header>
-    <div class="nav-container">
-      <a href="index.html" class="brand">
-        <span class="brand-title">D. STAMOS &amp; CO.</span>
-        <span class="brand-sub">Private Wealth &amp; Capital Desk</span>
-      </a>
+    <div class="topbar">
+      <a href="index.html" class="back-link">&larr; House</a>
 
-      <nav class="nav-links">
-        <a href="#mandate">Mandate</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#digital-desk">Digital Desk</a>
-        <a href="#footprint">Athens &amp; Access</a>
-      </nav>
-
-      <div class="nav-actions">
-        <a href="app.html" class="btn-portal">Client Portal &rarr;</a>
+      <div class="portal-brand">
+        <div class="portal-brand-title">D. STAMOS &amp; CO.</div>
+        <div class="portal-brand-sub">Private Client Portal</div>
       </div>
+
+      <div class="status-pill" id="portalRoleBadge">Preview Mode</div>
     </div>
   </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero" id="mandate">
-      <div class="container">
-        <div class="eyebrow">Athens &bull; Private Client &amp; Institutional Concept</div>
-        <h1>Disciplined Capital Architecture for <span>Private Principals.</span></h1>
-        <p class="hero-desc">
-          D. STAMOS &amp; CO. brings together institutional portfolio discipline, cross-border liquidity workflows, and bespoke private client access within a unified digital architecture.
+  <main class="container">
+    <div class="sync-banner" id="guestSyncBanner">
+      <p><strong>Unsynced Preview:</strong> Register on the main house page to personalize your 3D Founder Card and generate your invite link.</p>
+      <a href="index.html#access" class="btn-gold">Activate Member Profile &rarr;</a>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="vault">01 / Vault &amp; 3D Card</button>
+      <button class="tab-btn" data-tab="liquidity">02 / Liquidity Staging</button>
+      <button class="tab-btn" data-tab="invites">03 / Invite &amp; Access Codes</button>
+    </div>
+
+    <div class="panel active" id="tab-vault">
+      <div class="overview-grid">
+        <div class="card-stage">
+          <div class="card-3d-scene" id="portalCard3D" title="Tap or click to flip card">
+            <div class="card-3d-inner" id="portalCardInner">
+              <div class="card-face card-front">
+                <div class="card-top">
+                  <span class="card-issuer">D. STAMOS &amp; CO.</span>
+                  <span class="card-tier">Founder Edition</span>
+                </div>
+                <div class="card-mid">
+                  <div class="card-chip"></div>
+                  <div class="card-serial" id="portalCardSerial">FC &bull; 0001 &bull; ATH</div>
+                </div>
+                <div class="card-bottom">
+                  <div>
+                    <div class="card-holder-label">Private Principal</div>
+                    <div class="card-holder" id="portalCardHolder">Founding Member</div>
+                  </div>
+                  <div class="card-jurisdiction">Athens &bull; Private Desk</div>
+                </div>
+              </div>
+
+              <div class="card-face card-back">
+                <div class="mag-stripe"></div>
+                <div class="card-back-body">
+                  <div class="sig-band">
+                    <span style="font-size:0.58rem;color:var(--text-muted);letter-spacing:0.14em;">CODE</span>
+                    <span id="portalCardCode">STAMOS-ATH-001</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+                    <div style="font-size:0.62rem;color:var(--text-secondary);letter-spacing:0.1em;max-width:210px;">
+                      CONCEPT CREDENTIAL &bull; PRIVATE WEALTH ARCHITECTURE
+                    </div>
+                    <div style="font-family:'Cinzel',serif;font-size:0.68rem;color:var(--gold-light);letter-spacing:0.14em;">
+                      ATHENS DESK
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-controls">
+            <span>Tilt or tap card</span>
+            <button type="button" class="btn-flip" id="portalFlipBtn">Flip Card &harr;</button>
+          </div>
+        </div>
+
+        <div class="box" style="margin-bottom:0;">
+          <div class="box-kicker">Illustrative Allocation Telemetry</div>
+          <h3 id="welcomeHeading">Principal Overview</h3>
+          <p style="font-size:0.86rem;color:var(--text-secondary);">
+            Concept simulation of multi-currency liquidity and disciplined portfolio tranches.
+          </p>
+
+          <div class="stat-row">
+            <div class="stat-tile">
+              <span>Illustrative EUR Sleeve</span>
+              <strong>&euro; 250,000.00</strong>
+            </div>
+            <div class="stat-tile">
+              <span>Illustrative USD Sleeve</span>
+              <strong>$ 180,000.00</strong>
+            </div>
+            <div class="stat-tile">
+              <span>Cohort Priority</span>
+              <strong id="portalQueueStat">Founding List</strong>
+            </div>
+            <div class="stat-tile">
+              <span>Selected Focus</span>
+              <strong id="portalInterestStat" style="font-family:inherit;font-size:0.85rem;">Wealth Architecture</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="tab-liquidity">
+      <div class="box">
+        <div class="box-kicker">Workflow Simulation</div>
+        <h3>Stage Cross-Border Liquidity Request</h3>
+        <p style="font-size:0.86rem;color:var(--text-secondary);margin-bottom:16px;">
+          Simulate a treasury allocation or currency staging instruction (demonstration workflow only—no real funds are moved).
         </p>
 
-        <div class="hero-cta-group">
-          <a href="#access" class="btn-primary">Request Private Briefing</a>
-          <a href="app.html" class="btn-secondary">Enter Portal Preview</a>
-        </div>
+        <form id="stagingForm">
+          <div class="form-group">
+            <label>Currency Rail</label>
+            <select id="stageRail">
+              <option value="EUR — SEPA Institutional Staging">EUR &mdash; SEPA Institutional Staging</option>
+              <option value="USD — Fedwire / SWIFT Treasury">USD &mdash; Fedwire / SWIFT Treasury</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Illustrative Amount</label>
+            <input type="number" id="stageAmount" placeholder="e.g. 25000" required />
+          </div>
+          <div class="form-group">
+            <label>Desk Instruction Note</label>
+            <input type="text" id="stageNote" placeholder="e.g. Q1 Treasury Reserve Tranche" />
+          </div>
+          <button type="submit" class="btn-gold">Simulate Desk Instruction</button>
+        </form>
+        <div id="stagingStatus" style="margin-top:12px;font-size:0.85rem;color:var(--gold-light);"></div>
+      </div>
+    </div>
 
-        <div class="metrics-strip">
-          <div class="metric-item">
-            <div class="metric-label">Primary Jurisdiction</div>
-            <div class="metric-value">Athens, Greece</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-label">Client Segment</div>
-            <div class="metric-value">Principals &amp; Family Offices</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-label">Settlement Rails</div>
-            <div class="metric-value">EUR &bull; USD Multi-Currency</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-label">Program Status</div>
-            <div class="metric-value">Founding Cohort Open</div>
-          </div>
+    <div class="panel" id="tab-invites">
+      <div class="box">
+        <div class="box-kicker">Founding Cohort Expansion</div>
+        <h3>Your Synchronized Invite Link</h3>
+        <p style="font-size:0.86rem;color:var(--text-secondary);">
+          Share this link so new members enter under your referral code and synchronize directly with the house waitlist:
+        </p>
+        <div class="invite-row">
+          <input type="text" id="portalInviteInput" readonly style="color:var(--gold-light);font-size:0.82rem;" />
+          <button type="button" class="btn-gold" id="portalCopyBtn">Copy Link</button>
         </div>
       </div>
-    </section>
 
-    <!-- Institutional Capabilities (GSAM + JPM Style) -->
-    <section id="capabilities">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-kicker">Core Capabilities</div>
-          <h2>Institutional Rigor. Private Execution.</h2>
-          <p class="section-sub">
-            Structured around long-term capital preservation, selective liquidity deployment, and direct principal-level coverage.
-          </p>
-        </div>
-
-        <div class="pillars-grid">
-          <div class="pillar-card">
-            <div class="pillar-num">01 / WEALTH ARCHITECTURE</div>
-            <h3>Bespoke Asset Allocation</h3>
-            <p>
-              Multi-asset portfolio structuring designed around liquidity horizons, risk budgets, and disciplined capital compounding across public and private sleeves.
-            </p>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-num">02 / TREASURY &amp; LIQUIDITY</div>
-            <h3>Cross-Border Treasury Desk</h3>
-            <p>
-              Streamlined EUR and USD liquidity staging, treasury reserve workflows, and rapid capital allocation visibility through a single executive interface.
-            </p>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-num">03 / INTERMEDIARY &amp; ADVISORY</div>
-            <h3>Strategic Principal Coverage</h3>
-            <p>
-              Direct desk coordination for entrepreneurs, private holding structures, and family enterprises seeking discrete, high-touch execution.
-            </p>
-          </div>
-        </div>
+      <div class="box">
+        <div class="box-kicker">Private Guest Pass</div>
+        <h3>Generate Single-Use Preview Passcode</h3>
+        <p style="font-size:0.86rem;color:var(--text-secondary);">
+          Create a personal guest code to share alongside your link when inviting peers to preview the portal:
+        </p>
+        <div class="code-display" id="generatedPasscode">STAMOS-ATH-2026</div>
+        <button type="button" class="btn-gold" id="genCodeBtn">Generate New Code</button>
       </div>
-    </section>
+    </div>
 
-    <!-- Digital Private Banking & Founder Card (BankPro Style) -->
-    <section id="digital-desk">
-      <div class="container">
-        <div class="desk-layout">
-          <div>
-            <div class="section-kicker">Digital Private Environment</div>
-            <h2>The Founder Edition Interface.</h2>
-            <p class="section-sub">
-              Explore our interactive client portal prototype—built to preview multi-currency liquidity requests, tranche allocation views, and direct desk communications.
-            </p>
-
-            <ul class="feature-list">
-              <li><span>Allocation &amp; Vault Telemetry</span><strong>Real-Time Preview</strong></li>
-              <li><span>Liquidity &amp; Transfer Staging</span><strong>EUR / USD Rails</strong></li>
-              <li><span>Principal Credential</span><strong>Founder Edition</strong></li>
-              <li><span>Direct Desk Routing</span><strong>24/7 Priority Queue</strong></li>
-            </ul>
-
-            <a href="app.html" class="btn-primary">Launch Client Portal Preview &rarr;</a>
-          </div>
-
-          <div>
-            <div class="founder-card-visual">
-              <div class="card-top">
-                <span class="card-issuer">D. STAMOS &amp; CO.</span>
-                <span class="card-tier">Founder Edition</span>
-              </div>
-              <div class="card-chip"></div>
-              <div class="card-bottom">
-                <div>
-                  <div style="font-size:0.62rem;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:3px;">Private Principal</div>
-                  <div class="card-holder">Founding Member</div>
-                </div>
-                <div class="card-jurisdiction">Athens &bull; Private Desk</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footprint & Priority Access (JPM Greece Style) -->
-    <section id="footprint">
-      <div class="container">
-        <div class="access-grid" id="access">
-          <div class="office-box">
-            <div class="section-kicker">Local Footprint</div>
-            <h3>D. STAMOS &amp; CO. — Greece</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 300;">
-              Anchored in Athens with focus on the Southern Suburbs private enterprise and maritime/hospitality principal community, connecting local capital with international standards.
-            </p>
-
-            <div class="office-meta">
-              <div><strong style="color:var(--text-primary);">Desk Location:</strong> Glyfada, Athens, Greece</div>
-              <div><strong style="color:var(--text-primary);">Coverage:</strong> Private Principals &amp; Strategic Partners</div>
-              <div><strong style="color:var(--text-primary);">Portal Access:</strong> <a href="app.html" style="color:var(--gold-light);text-decoration:none;">app.html (Interactive Preview)</a></div>
-            </div>
-          </div>
-
-          <div class="form-box">
-            <div class="section-kicker">Founding Cohort Registration</div>
-            <h3 style="font-family:'Cinzel',serif;font-size:1.3rem;margin-bottom:6px;">Request Private Access</h3>
-            <p style="color:var(--text-secondary);font-size:0.86rem;margin-bottom:18px;">
-              Submit your details to register interest for the upcoming D. STAMOS &amp; CO. private onboarding cycle.
-            </p>
-
-            <form id="accessForm">
-              <div class="form-group">
-                <label for="fullName">Full Name / Principal</label>
-                <input type="text" id="fullName" placeholder="e.g. Alexandros Papadopoulos" required />
-              </div>
-
-              <div class="form-group">
-                <label for="email">Private or Corporate Email</label>
-                <input type="email" id="email" placeholder="name@domain.com" required />
-              </div>
-
-              <div class="form-group">
-                <label for="interest">Primary Area of Interest</label>
-                <select id="interest">
-                  <option value="Private Wealth & Asset Allocation">Private Wealth &amp; Asset Allocation</option>
-                  <option value="Treasury & Multi-Currency Liquidity">Treasury &amp; Multi-Currency Liquidity</option>
-                  <option value="Founder Edition Access">Founder Edition Access</option>
-                  <option value="Strategic Partnership">Strategic Partnership</option>
-                </select>
-              </div>
-
-              <button type="submit" class="btn-primary" style="width:100%;">Submit Priority Inquiry</button>
-              <div class="form-status" id="formStatus"></div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="disclosure-bar">
+      <strong>Interactive Prototype Notice:</strong> This portal is a conceptual interface demonstration for D. STAMOS &amp; CO. No actual banking, custody, payment, or investment transactions take place here. <a href="index.html" style="color:var(--gold-light);">Return to D. STAMOS &amp; CO. Home &rarr;</a>
+    </div>
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-top">
-        <div>
-          <span class="brand-title" style="font-size:0.95rem;">D. STAMOS &amp; CO.</span>
-          <span style="margin-left:10px;">&copy; 2026 All Rights Reserved.</span>
-        </div>
-        <div class="footer-links">
-          <a href="#mandate">Mandate</a>
-          <a href="#capabilities">Capabilities</a>
-          <a href="#digital-desk">Digital Desk</a>
-          <a href="app.html">Client Portal</a>
-        </div>
-      </div>
-
-      <p class="disclosure">
-        <strong>Important Notice &amp; Pre-Launch Disclosure:</strong> D. STAMOS &amp; CO. is currently presented as a private concept, brand architecture, and interactive digital portal preview. Neither this website nor the accompanying portal prototype constitutes a licensed bank, credit institution, investment firm, or regulated financial service provider, nor does it solicit deposits, custody client funds, or offer investment advice. All figures, cards, and workflows displayed in the portal preview are illustrative demonstrations only.
-      </p>
-    </div>
-  </footer>
-
   <script>
-    const form = document.getElementById('accessForm');
-    const statusBox = document.getElementById('formStatus');
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
 
-    form.addEventListener('submit', function(e) {
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // 3D Card Tilt & Flip
+    const pScene = document.getElementById('portalCard3D');
+    const pInner = document.getElementById('portalCardInner');
+    const pFlipBtn = document.getElementById('portalFlipBtn');
+    let pFlipped = false;
+    let pTiltX = 0;
+    let pTiltY = 0;
+
+    function applyPortalTransform() {
+      pInner.style.transform = `rotateY(${(pFlipped ? 180 : 0) + pTiltY}deg) rotateX(${pTiltX}deg)`;
+    }
+
+    function togglePortalFlip() {
+      pFlipped = !pFlipped;
+      applyPortalTransform();
+    }
+
+    pScene.addEventListener('click', togglePortalFlip);
+    pFlipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePortalFlip();
+    });
+
+    pScene.addEventListener('mousemove', (e) => {
+      const rect = pScene.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      pTiltY = nx * 16;
+      pTiltX = -ny * 12;
+      applyPortalTransform();
+    });
+
+    pScene.addEventListener('mouseleave', () => {
+      pTiltX = 0;
+      pTiltY = 0;
+      applyPortalTransform();
+    });
+
+    // Hydrate from synced profile
+    const savedProfile = JSON.parse(localStorage.getItem('stamos_member_profile') || 'null');
+    const baseHouseUrl = window.location.href.replace(/app\.html.*$/, 'index.html');
+
+    if (savedProfile) {
+      document.getElementById('guestSyncBanner').style.display = 'none';
+      document.getElementById('portalRoleBadge').textContent = 'Synced \u2022 #' + savedProfile.queueSpot;
+      document.getElementById('portalCardHolder').textContent = savedProfile.name;
+      document.getElementById('portalCardSerial').textContent = 'FC \u2022 ' + String(savedProfile.queueSpot).padStart(4, '0') + ' \u2022 ATH';
+      document.getElementById('portalCardCode').textContent = savedProfile.userCode.toUpperCase();
+      document.getElementById('welcomeHeading').textContent = 'Welcome, ' + savedProfile.name;
+      document.getElementById('portalQueueStat').textContent = '#' + savedProfile.queueSpot;
+      document.getElementById('portalInterestStat').textContent = savedProfile.interest;
+      document.getElementById('portalInviteInput').value = savedProfile.inviteUrl;
+    } else {
+      document.getElementById('portalInviteInput').value = baseHouseUrl;
+    }
+
+    document.getElementById('portalCopyBtn').addEventListener('click', function() {
+      const inp = document.getElementById('portalInviteInput');
+      inp.select();
+      inp.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(inp.value).catch(() => document.execCommand('copy'));
+      this.textContent = 'Copied!';
+      setTimeout(() => { this.textContent = 'Copy Link'; }, 2000);
+    });
+
+    document.getElementById('genCodeBtn').addEventListener('click', function() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let part = '';
+      for (let i = 0; i < 6; i++) {
+        part += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById('generatedPasscode').textContent = 'STAMOS-' + part;
+    });
+
+    document.getElementById('stagingForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const name = document.getElementById('fullName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const interest = document.getElementById('interest').value;
-
-      const entry = {
-        name,
-        email,
-        interest,
-        submittedAt: new Date().toISOString()
-      };
-
-      const existing = JSON.parse(localStorage.getItem('stamos_inquiries') || '[]');
-      existing.push(entry);
-      localStorage.setItem('stamos_inquiries', JSON.stringify(existing));
-
-      statusBox.style.display = 'block';
-      statusBox.innerHTML = '<strong>Inquiry Recorded:</strong> Thank you, ' + name + '. Your request under <em>' + interest + '</em> has been logged for review. You may now explore the <a href="app.html" style="color:#f1d882;text-decoration:underline;">Client Portal Preview</a>.';
-      form.reset();
+      const rail = document.getElementById('stageRail').value;
+      const amt = document.getElementById('stageAmount').value;
+      document.getElementById('stagingStatus').innerHTML =
+        '<strong>Simulated Instruction Logged:</strong> ' + Number(amt).toLocaleString() + ' via <em>' + rail + '</em> (Preview Mode).';
+      this.reset();
     });
   </script>
 </body>
