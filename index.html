@@ -286,7 +286,7 @@
       font-weight: 300;
     }
 
-    /* Pillars Grid (GSAM + JPM Style) */
+    /* Pillars Grid */
     .pillars-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -326,7 +326,7 @@
       font-weight: 300;
     }
 
-    /* Digital Desk & Founder Card Preview (BankPro Style) */
+    /* Digital Desk & Founder Card Preview */
     .desk-layout {
       display: grid;
       grid-template-columns: 1fr;
@@ -500,15 +500,47 @@
       border-color: var(--gold);
     }
 
+    .invite-box {
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(212, 175, 55, 0.07);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      display: none;
+    }
+
+    .invite-link-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .invite-link-input {
+      flex: 1;
+      font-size: 0.82rem !important;
+      padding: 10px !important;
+      color: var(--gold-light) !important;
+    }
+
+    .btn-copy {
+      padding: 10px 14px;
+      background: var(--gold);
+      color: #07080a;
+      border: none;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
     .form-status {
-      margin-top: 14px;
+      margin-top: 12px;
       font-size: 0.85rem;
       color: var(--gold-light);
       display: none;
-      padding: 10px 12px;
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid var(--border-subtle);
-      border-radius: 3px;
     }
 
     /* Footer */
@@ -605,7 +637,7 @@
         </p>
 
         <div class="hero-cta-group">
-          <a href="#access" class="btn-primary">Request Private Briefing</a>
+          <a href="#access" class="btn-primary">Join Priority Waitlist</a>
           <a href="app.html" class="btn-secondary">Enter Portal Preview</a>
         </div>
 
@@ -630,7 +662,7 @@
       </div>
     </section>
 
-    <!-- Institutional Capabilities (GSAM + JPM Style) -->
+    <!-- Institutional Capabilities -->
     <section id="capabilities">
       <div class="container">
         <div class="section-header">
@@ -669,7 +701,7 @@
       </div>
     </section>
 
-    <!-- Digital Private Banking & Founder Card (BankPro Style) -->
+    <!-- Digital Private Banking & Founder Card -->
     <section id="digital-desk">
       <div class="container">
         <div class="desk-layout">
@@ -710,7 +742,7 @@
       </div>
     </section>
 
-    <!-- Footprint & Priority Access (JPM Greece Style) -->
+    <!-- Footprint & Priority Access Form -->
     <section id="footprint">
       <div class="container">
         <div class="access-grid" id="access">
@@ -723,32 +755,35 @@
 
             <div class="office-meta">
               <div><strong style="color:var(--text-primary);">Desk Location:</strong> Glyfada, Athens, Greece</div>
-              <div><strong style="color:var(--text-primary);">Coverage:</strong> Private Principals &amp; Strategic Partners</div>
+              <div><strong style="color:var(--text-primary);">Onboarding Model:</strong> Priority Waitlist &amp; Invite Code</div>
               <div><strong style="color:var(--text-primary);">Portal Access:</strong> <a href="app.html" style="color:var(--gold-light);text-decoration:none;">app.html (Interactive Preview)</a></div>
             </div>
           </div>
 
           <div class="form-box">
             <div class="section-kicker">Founding Cohort Registration</div>
-            <h3 style="font-family:'Cinzel',serif;font-size:1.3rem;margin-bottom:6px;">Request Private Access</h3>
+            <h3 style="font-family:'Cinzel',serif;font-size:1.3rem;margin-bottom:6px;">Request Private Access &amp; Invite Link</h3>
             <p style="color:var(--text-secondary);font-size:0.86rem;margin-bottom:18px;">
-              Submit your details to register interest for the upcoming D. STAMOS &amp; CO. private onboarding cycle.
+              Join the waitlist and receive your personal invite link to move up the priority queue.
             </p>
 
-            <form id="accessForm">
+            <form id="accessForm" action="https://formspree.io/f/xyewdgbk" method="POST">
+              <input type="hidden" name="invited_by" id="invitedByInput" value="Direct" />
+              <input type="hidden" name="referral_code" id="referralCodeInput" value="" />
+
               <div class="form-group">
                 <label for="fullName">Full Name / Principal</label>
-                <input type="text" id="fullName" placeholder="e.g. Alexandros Papadopoulos" required />
+                <input type="text" id="fullName" name="name" placeholder="e.g. Alexandros Papadopoulos" required />
               </div>
 
               <div class="form-group">
                 <label for="email">Private or Corporate Email</label>
-                <input type="email" id="email" placeholder="name@domain.com" required />
+                <input type="email" id="email" name="email" placeholder="name@domain.com" required />
               </div>
 
               <div class="form-group">
                 <label for="interest">Primary Area of Interest</label>
-                <select id="interest">
+                <select id="interest" name="interest">
                   <option value="Private Wealth & Asset Allocation">Private Wealth &amp; Asset Allocation</option>
                   <option value="Treasury & Multi-Currency Liquidity">Treasury &amp; Multi-Currency Liquidity</option>
                   <option value="Founder Edition Access">Founder Edition Access</option>
@@ -756,8 +791,24 @@
                 </select>
               </div>
 
-              <button type="submit" class="btn-primary" style="width:100%;">Submit Priority Inquiry</button>
+              <button type="submit" class="btn-primary" style="width:100%;" id="submitBtn">Join Waitlist &amp; Get Invite Link</button>
               <div class="form-status" id="formStatus"></div>
+
+              <div class="invite-box" id="inviteBox">
+                <div style="font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-light);">
+                  Your Personal Priority Invite Link
+                </div>
+                <p style="font-size:0.84rem;color:var(--text-secondary);margin-top:4px;">
+                  Share this link with friends or peers to climb the Founding Cohort queue:
+                </p>
+                <div class="invite-link-row">
+                  <input type="text" id="inviteLinkField" class="invite-link-input" readonly />
+                  <button type="button" class="btn-copy" id="copyInviteBtn">Copy Link</button>
+                </div>
+                <div style="margin-top:12px;">
+                  <a href="app.html" style="color:var(--gold-light);font-size:0.84rem;text-decoration:underline;">Open Client Portal Preview &rarr;</a>
+                </div>
+              </div>
             </form>
           </div>
         </div>
@@ -789,28 +840,97 @@
   <script>
     const form = document.getElementById('accessForm');
     const statusBox = document.getElementById('formStatus');
+    const inviteBox = document.getElementById('inviteBox');
+    const inviteLinkField = document.getElementById('inviteLinkField');
+    const copyInviteBtn = document.getElementById('copyInviteBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const invitedByInput = document.getElementById('invitedByInput');
+    const referralCodeInput = document.getElementById('referralCodeInput');
 
-    form.addEventListener('submit', function(e) {
+    // Detect ?ref= parameter if someone opened via an invite link
+    const urlParams = new URLSearchParams(window.location.search);
+    const refFromUrl = urlParams.get('ref');
+    if (refFromUrl) {
+      invitedByInput.value = refFromUrl;
+    }
+
+    function makeSlug(str) {
+      return str
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'member';
+    }
+
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const name = document.getElementById('fullName').value.trim();
       const email = document.getElementById('email').value.trim();
       const interest = document.getElementById('interest').value;
 
-      const entry = {
-        name,
-        email,
-        interest,
-        submittedAt: new Date().toISOString()
-      };
+      const userCode = makeSlug(name) + '-' + Math.floor(100 + Math.random() * 900);
+      referralCodeInput.value = userCode;
 
-      const existing = JSON.parse(localStorage.getItem('stamos_inquiries') || '[]');
-      existing.push(entry);
-      localStorage.setItem('stamos_inquiries', JSON.stringify(existing));
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Registering...';
 
-      statusBox.style.display = 'block';
-      statusBox.innerHTML = '<strong>Inquiry Recorded:</strong> Thank you, ' + name + '. Your request under <em>' + interest + '</em> has been logged for review. You may now explore the <a href="app.html" style="color:#f1d882;text-decoration:underline;">Client Portal Preview</a>.';
-      form.reset();
+      const formData = new FormData(form);
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        const baseUrl = window.location.origin + window.location.pathname;
+        const personalInviteUrl = baseUrl + '?ref=' + encodeURIComponent(userCode);
+        const queueSpot = Math.max(12, 1840 - (JSON.parse(localStorage.getItem('stamos_inquiries') || '[]').length * 17));
+
+        const existing = JSON.parse(localStorage.getItem('stamos_inquiries') || '[]');
+        existing.push({
+          name,
+          email,
+          interest,
+          userCode,
+          invitedBy: invitedByInput.value,
+          submittedAt: new Date().toISOString()
+        });
+        localStorage.setItem('stamos_inquiries', JSON.stringify(existing));
+
+        statusBox.style.display = 'block';
+        if (res.ok) {
+          statusBox.innerHTML = '<strong>Confirmed:</strong> ' + name + ', you are registered (Queue Est. <strong>#' + queueSpot + '</strong>) under <em>' + interest + '</em>.';
+        } else {
+          statusBox.innerHTML = '<strong>Recorded Locally:</strong> ' + name + ', your entry is saved (Queue Est. <strong>#' + queueSpot + '</strong>). Check Formspree verification if email delivery is pending.';
+        }
+
+        inviteLinkField.value = personalInviteUrl;
+        inviteBox.style.display = 'block';
+        form.reset();
+      } catch (err) {
+        statusBox.style.display = 'block';
+        statusBox.innerHTML = '<strong>Connection Note:</strong> Could not reach Formspree right now. Please try again in a moment.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Join Waitlist & Get Invite Link';
+      }
+    });
+
+    copyInviteBtn.addEventListener('click', function() {
+      inviteLinkField.select();
+      inviteLinkField.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(inviteLinkField.value).then(() => {
+        copyInviteBtn.textContent = 'Copied!';
+        setTimeout(() => { copyInviteBtn.textContent = 'Copy Link'; }, 2000);
+      }).catch(() => {
+        document.execCommand('copy');
+        copyInviteBtn.textContent = 'Copied!';
+        setTimeout(() => { copyInviteBtn.textContent = 'Copy Link'; }, 2000);
+      });
     });
   </script>
 </body>
 </html>
+
+            
