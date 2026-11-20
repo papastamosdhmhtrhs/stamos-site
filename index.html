@@ -6,30 +6,23 @@
   <title>D. STAMOS & CO. | Private Wealth & Capital Architecture</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #07080a;
-      --bg-secondary: #0d0f13;
-      --bg-card: #11141a;
+      --bg-primary: #060709;
+      --bg-secondary: #0c0e13;
+      --bg-card: #10131b;
       --border-subtle: rgba(212, 175, 55, 0.16);
-      --border-strong: rgba(212, 175, 55, 0.42);
+      --border-strong: rgba(212, 175, 55, 0.46);
       --gold: #d4af37;
-      --gold-light: #f1d882;
-      --text-primary: #f4f5f7;
-      --text-secondary: #9ca3af;
-      --text-muted: #6b7280;
+      --gold-light: #f4df92;
+      --text-primary: #f6f7f9;
+      --text-secondary: #9ea6b2;
+      --text-muted: #67707d;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       background-color: var(--bg-primary);
@@ -38,6 +31,32 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle Wall Street Charging Bull Background Watermark */
+    .bull-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .bull-backdrop svg {
+      width: min(92vw, 980px);
+      height: auto;
+      opacity: 0.045;
+      transform: translateY(4%) scale(1.04);
+      filter: drop-shadow(0 0 36px rgba(212, 175, 55, 0.12));
+    }
+
+    header, main, footer {
+      position: relative;
+      z-index: 1;
     }
 
     /* Navigation */
@@ -45,26 +64,22 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 8, 10, 0.88);
-      backdrop-filter: blur(14px);
+      background: rgba(6, 7, 9, 0.88);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border-subtle);
     }
 
     .nav-container {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 16px 20px;
+      padding: 15px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
     }
 
-    .brand {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-    }
+    .brand { display: flex; flex-direction: column; text-decoration: none; }
 
     .brand-title {
       font-family: 'Cinzel', serif;
@@ -75,36 +90,25 @@
     }
 
     .brand-sub {
-      font-size: 0.62rem;
+      font-size: 0.58rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
       margin-top: 2px;
     }
 
-    .nav-links {
-      display: none;
-      gap: 28px;
-    }
+    .nav-links { display: none; gap: 28px; }
 
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.82rem;
-      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
-      color: var(--gold-light);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .nav-links a:hover { color: var(--gold-light); }
 
     .btn-portal {
       display: inline-flex;
@@ -112,9 +116,9 @@
       gap: 6px;
       padding: 9px 14px;
       border: 1px solid var(--border-strong);
-      background: rgba(212, 175, 55, 0.08);
+      background: rgba(212, 175, 55, 0.09);
       color: var(--gold-light);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -123,123 +127,121 @@
       transition: all 0.25s ease;
     }
 
-    .btn-portal:hover {
-      background: var(--gold);
-      color: #07080a;
-    }
+    .btn-portal:hover { background: var(--gold); color: #060709; }
 
-    /* Hero Section */
+    /* Hero */
     .hero {
-      position: relative;
-      padding: 72px 20px 64px;
+      padding: 72px 20px 62px;
       background:
-        radial-gradient(circle at 80% 15%, rgba(212, 175, 55, 0.09), transparent 45%),
-        radial-gradient(circle at 15% 85%, rgba(212, 175, 55, 0.05), transparent 40%),
-        var(--bg-primary);
+        radial-gradient(circle at 82% 16%, rgba(212, 175, 55, 0.11), transparent 46%),
+        radial-gradient(circle at 14% 85%, rgba(212, 175, 55, 0.05), transparent 42%);
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1180px; margin: 0 auto; }
 
     .eyebrow {
-      display: inline-block;
-      font-size: 0.7rem;
-      letter-spacing: 0.24em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
       border: 1px solid var(--border-subtle);
       padding: 6px 12px;
       border-radius: 2px;
-      margin-bottom: 24px;
-      background: rgba(212, 175, 55, 0.04);
+      margin-bottom: 22px;
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
     }
 
     h1 {
       font-family: 'Cinzel', serif;
       font-size: clamp(2rem, 5.2vw, 3.6rem);
       font-weight: 600;
-      line-height: 1.15;
+      line-height: 1.14;
       letter-spacing: 0.03em;
-      max-width: 860px;
-      margin-bottom: 22px;
+      max-width: 880px;
+      margin-bottom: 20px;
     }
 
-    h1 span {
-      color: var(--gold-light);
-    }
+    h1 span { color: var(--gold-light); }
 
     .hero-desc {
       color: var(--text-secondary);
-      font-size: 1rem;
+      font-size: 0.98rem;
       max-width: 640px;
-      margin-bottom: 34px;
+      margin-bottom: 32px;
       font-weight: 300;
     }
 
     .hero-cta-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 52px;
+      gap: 12px;
+      margin-bottom: 48px;
     }
 
     .btn-primary {
-      padding: 14px 26px;
-      background: linear-gradient(135deg, var(--gold), #b89124);
-      color: #07080a;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold) 52%, #a9821b 100%);
+      color: #060709;
       font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
+      font-size: 0.76rem;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
       text-decoration: none;
       border: none;
       border-radius: 3px;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 10px 26px rgba(212, 175, 55, 0.26);
     }
 
     .btn-secondary {
-      padding: 14px 26px;
-      background: transparent;
+      padding: 14px 24px;
+      background: rgba(12, 14, 19, 0.75);
       color: var(--text-primary);
       border: 1px solid rgba(255, 255, 255, 0.18);
       font-weight: 500;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
+      font-size: 0.76rem;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
       text-decoration: none;
       border-radius: 3px;
       transition: border-color 0.2s, color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--gold);
-      color: var(--gold-light);
-    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold-light); }
 
-    /* Institutional Metrics Strip */
     .metrics-strip {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
-      padding-top: 32px;
+      padding-top: 28px;
       border-top: 1px solid var(--border-subtle);
     }
 
-    .metric-item {
-      padding: 12px 0;
-    }
-
     .metric-label {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text-muted);
@@ -248,236 +250,329 @@
 
     .metric-value {
       font-family: 'Cinzel', serif;
-      font-size: 1.15rem;
+      font-size: 1.06rem;
       color: var(--text-primary);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
 
     /* Sections */
-    section {
-      padding: 68px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .section-header {
-      margin-bottom: 40px;
-    }
+    section { padding: 66px 20px; border-bottom: 1px solid var(--border-subtle); }
+    .section-header { margin-bottom: 36px; }
 
     .section-kicker {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     h2 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-size: clamp(1.45rem, 3.5vw, 2.2rem);
       font-weight: 600;
       letter-spacing: 0.03em;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .section-sub {
       color: var(--text-secondary);
       max-width: 620px;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       font-weight: 300;
     }
 
-    /* Pillars Grid */
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
+    /* Pillars */
+    .pillars-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
 
     .pillar-card {
-      background: var(--bg-card);
+      background: rgba(16, 19, 27, 0.86);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--border-subtle);
-      padding: 28px 24px;
+      padding: 26px 22px;
       border-radius: 4px;
-      transition: border-color 0.25s;
+      transition: border-color 0.25s, transform 0.25s;
     }
 
-    .pillar-card:hover {
-      border-color: var(--border-strong);
-    }
+    .pillar-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
 
     .pillar-num {
       font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       color: var(--gold);
-      letter-spacing: 0.15em;
-      margin-bottom: 14px;
+      letter-spacing: 0.16em;
+      margin-bottom: 12px;
     }
 
     .pillar-card h3 {
       font-family: 'Cinzel', serif;
-      font-size: 1.15rem;
-      margin-bottom: 10px;
+      font-size: 1.12rem;
+      margin-bottom: 8px;
       font-weight: 600;
     }
 
-    .pillar-card p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 300;
-    }
+    .pillar-card p { color: var(--text-secondary); font-size: 0.89rem; font-weight: 300; }
 
-    /* Digital Desk & Founder Card Preview */
-    .desk-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
+    /* 3D Interactive Flippable Metal Card */
+    .desk-layout { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: center; }
+
+    .card-stage {
+      display: flex;
+      flex-direction: column;
       align-items: center;
     }
 
-    .founder-card-visual {
-      background: linear-gradient(145deg, #17191f 0%, #090a0d 60%, #1a150b 100%);
-      border: 1px solid var(--border-strong);
-      border-radius: 14px;
-      padding: 28px 24px;
-      max-width: 420px;
+    .card-3d-scene {
       width: 100%;
-      margin: 0 auto;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+      max-width: 396px;
+      aspect-ratio: 1.586 / 1;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .card-3d-inner {
+      width: 100%;
+      height: 100%;
       position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: 14px;
+    }
+
+    .card-3d-scene.flipped .card-3d-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 14px;
+      padding: 20px 22px;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      box-shadow:
+        0 24px 56px rgba(0, 0, 0, 0.88),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       overflow: hidden;
     }
 
-    .founder-card-visual::after {
+    .card-front {
+      background:
+        linear-gradient(125deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 45%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.014) 0px, rgba(255,255,255,0.014) 1px, transparent 1px, transparent 3px),
+        linear-gradient(145deg, #181b22 0%, #090a0e 56%, #19140a 100%);
+    }
+
+    .card-front::before {
       content: "";
       position: absolute;
-      top: -40%;
-      right: -20%;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.18), transparent 70%);
+      inset: 0;
+      background: radial-gradient(circle at 86% 18%, rgba(212, 175, 55, 0.24), transparent 52%);
       pointer-events: none;
     }
 
-    .card-top {
+    .card-back {
+      transform: rotateY(180deg);
+      background:
+        linear-gradient(145deg, #13151b 0%, #07080b 65%, #161108 100%);
+      padding: 0;
+      justify-content: space-between;
+    }
+
+    .mag-stripe {
+      height: 38px;
+      width: 100%;
+      margin-top: 18px;
+      background: repeating-linear-gradient(
+        180deg,
+        #191c22 0px,
+        #0c0d10 4px,
+        #22262e 6px,
+        #090a0d 10px
+      );
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .card-back-body {
+      padding: 14px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    .sig-band {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.24);
+      border-radius: 3px;
+      padding: 7px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 36px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold-light);
+      letter-spacing: 0.14em;
     }
+
+    .card-top, .card-mid, .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-bottom { align-items: flex-end; }
 
     .card-issuer {
       font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
+      font-size: 0.86rem;
+      font-weight: 700;
       letter-spacing: 0.18em;
       color: var(--gold-light);
     }
 
     .card-tier {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      font-size: 0.56rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--text-secondary);
-      border: 1px solid var(--border-subtle);
-      padding: 4px 8px;
+      color: var(--gold);
+      border: 1px solid rgba(212, 175, 55, 0.36);
+      padding: 3px 8px;
       border-radius: 2px;
+      background: rgba(0, 0, 0, 0.4);
     }
 
     .card-chip {
-      width: 40px;
-      height: 28px;
+      width: 38px;
+      height: 27px;
       border-radius: 5px;
-      background: linear-gradient(135deg, #e7c96b, #9c7a1c);
-      margin-bottom: 28px;
-      opacity: 0.9;
+      background: linear-gradient(135deg, #f3dc8b 0%, #c89f32 55%, #8c6a15 100%);
+      border: 1px solid rgba(255, 245, 204, 0.48);
+      position: relative;
     }
 
-    .card-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+    .card-chip::after {
+      content: "";
+      position: absolute;
+      inset: 5px 8px;
+      border: 1px solid rgba(6, 7, 9, 0.38);
+      border-radius: 2px;
+    }
+
+    .card-serial {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: rgba(246, 247, 249, 0.62);
+    }
+
+    .card-holder-label {
+      font-size: 0.52rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
     }
 
     .card-holder {
       font-size: 0.78rem;
-      letter-spacing: 0.18em;
+      font-weight: 500;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--text-primary);
     }
 
     .card-jurisdiction {
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      color: var(--gold);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      color: var(--gold-light);
       text-transform: uppercase;
     }
 
-    .feature-list {
-      list-style: none;
-      margin: 22px 0 28px;
+    .card-controls {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
+
+    .btn-flip {
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-strong);
+      color: var(--gold-light);
+      padding: 5px 10px;
+      border-radius: 2px;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .feature-list { list-style: none; margin: 20px 0 26px; }
 
     .feature-list li {
       padding: 10px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       color: var(--text-secondary);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       display: flex;
       justify-content: space-between;
       gap: 12px;
     }
 
-    .feature-list li strong {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
+    .feature-list li strong { color: var(--text-primary); font-weight: 500; }
 
-    /* Footprint & Access Form */
-    .access-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
+    /* Access Form */
+    .access-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
 
     .office-box {
-      background: var(--bg-secondary);
+      background: rgba(12, 14, 19, 0.88);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--border-subtle);
-      padding: 28px 24px;
+      padding: 26px 22px;
       border-radius: 4px;
     }
 
     .office-box h3 {
       font-family: 'Cinzel', serif;
-      font-size: 1.15rem;
-      margin-bottom: 12px;
+      font-size: 1.12rem;
+      margin-bottom: 10px;
       color: var(--gold-light);
     }
 
     .office-meta {
-      margin-top: 20px;
-      padding-top: 18px;
+      margin-top: 18px;
+      padding-top: 16px;
       border-top: 1px solid var(--border-subtle);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       color: var(--text-secondary);
     }
 
-    .office-meta div {
-      margin-bottom: 8px;
-    }
+    .office-meta div { margin-bottom: 8px; }
 
     .form-box {
-      background: var(--bg-card);
+      background: rgba(16, 19, 27, 0.9);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--border-strong);
-      padding: 28px 24px;
+      padding: 26px 22px;
       border-radius: 4px;
     }
 
-    .form-group {
-      margin-bottom: 16px;
-    }
+    .form-group { margin-bottom: 15px; }
 
     label {
       display: block;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-secondary);
@@ -487,7 +582,7 @@
     input, select {
       width: 100%;
       padding: 12px 14px;
-      background: #07080a;
+      background: #060709;
       border: 1px solid rgba(255, 255, 255, 0.14);
       color: var(--text-primary);
       border-radius: 3px;
@@ -495,29 +590,22 @@
       font-size: 0.92rem;
     }
 
-    input:focus, select:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
+    input:focus, select:focus { outline: none; border-color: var(--gold); }
 
     .invite-box {
       margin-top: 16px;
       padding: 16px;
-      background: rgba(212, 175, 55, 0.07);
+      background: rgba(212, 175, 55, 0.08);
       border: 1px solid var(--border-strong);
       border-radius: 4px;
       display: none;
     }
 
-    .invite-link-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
+    .invite-link-row { display: flex; gap: 8px; margin-top: 10px; }
 
     .invite-link-input {
       flex: 1;
-      font-size: 0.82rem !important;
+      font-size: 0.8rem !important;
       padding: 10px !important;
       color: var(--gold-light) !important;
     }
@@ -525,11 +613,11 @@
     .btn-copy {
       padding: 10px 14px;
       background: var(--gold);
-      color: #07080a;
+      color: #060709;
       border: none;
       border-radius: 3px;
       font-weight: 600;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       cursor: pointer;
@@ -538,73 +626,53 @@
 
     .form-status {
       margin-top: 12px;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       color: var(--gold-light);
       display: none;
     }
 
     /* Footer */
     footer {
-      padding: 42px 20px 54px;
-      background: #050608;
+      padding: 40px 20px 52px;
+      background: rgba(4, 5, 7, 0.94);
       color: var(--text-muted);
-      font-size: 0.78rem;
+      font-size: 0.77rem;
     }
 
     .footer-top {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      padding-bottom: 24px;
+      gap: 14px;
+      padding-bottom: 22px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      color: var(--gold-light);
-    }
-
-    .disclosure {
-      line-height: 1.65;
-      max-width: 920px;
-    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .disclosure { line-height: 1.65; max-width: 920px; }
 
     @media (min-width: 768px) {
-      .nav-links {
-        display: flex;
-      }
-      .metrics-strip {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .pillars-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .desk-layout {
-        grid-template-columns: 1fr 1fr;
-      }
-      .access-grid {
-        grid-template-columns: 1fr 1.2fr;
-      }
-      .footer-top {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
+      .nav-links { display: flex; }
+      .metrics-strip { grid-template-columns: repeat(4, 1fr); }
+      .pillars-grid { grid-template-columns: repeat(3, 1fr); }
+      .desk-layout { grid-template-columns: 1fr 1fr; }
+      .access-grid { grid-template-columns: 1fr 1.2fr; }
+      .footer-top { flex-direction: row; justify-content: space-between; align-items: center; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Subtle Wall Street Bull Watermark -->
+  <div class="bull-backdrop" aria-hidden="true">
+    <svg viewBox="0 0 800 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M128 332C146 286 184 252 232 234L296 210C356 188 424 176 492 174L568 150C596 140 622 122 642 98L668 68C675 60 688 64 686 75L678 118L724 114C734 113 738 126 729 132L688 158C698 178 696 204 680 220L654 246C634 266 604 276 574 274L542 272L526 392C524 404 508 405 505 393L482 302H346L318 394C314 405 298 404 296 392L284 306L212 378C204 386 190 381 191 370L198 312L144 352C134 359 123 345 128 332Z" stroke="#d4af37" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M236 238C288 214 358 202 442 198M524 226C560 224 592 214 618 196" stroke="#d4af37" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+      <circle cx="646" cy="154" r="5" fill="#d4af37" opacity="0.7"/>
+    </svg>
+  </div>
 
   <header>
     <div class="nav-container">
@@ -620,25 +688,22 @@
         <a href="#footprint">Athens &amp; Access</a>
       </nav>
 
-      <div class="nav-actions">
-        <a href="app.html" class="btn-portal">Client Portal &rarr;</a>
-      </div>
+      <a href="app.html" class="btn-portal" id="navPortalBtn">Client Portal &rarr;</a>
     </div>
   </header>
 
   <main>
-    <!-- Hero -->
     <section class="hero" id="mandate">
       <div class="container">
-        <div class="eyebrow">Athens &bull; Private Client &amp; Institutional Concept</div>
+        <div class="eyebrow"><span class="live-dot"></span>Athens &bull; Private Client &amp; Institutional Concept</div>
         <h1>Disciplined Capital Architecture for <span>Private Principals.</span></h1>
         <p class="hero-desc">
-          D. STAMOS &amp; CO. brings together institutional portfolio discipline, cross-border liquidity workflows, and bespoke private client access within a unified digital architecture.
+          D. STAMOS &amp; CO. unifies institutional portfolio discipline, multi-currency liquidity workflows, and private member access inside one cohesive digital architecture.
         </p>
 
         <div class="hero-cta-group">
           <a href="#access" class="btn-primary">Join Priority Waitlist</a>
-          <a href="app.html" class="btn-secondary">Enter Portal Preview</a>
+          <a href="app.html" class="btn-secondary">Enter Client Portal &rarr;</a>
         </div>
 
         <div class="metrics-strip">
@@ -656,13 +721,12 @@
           </div>
           <div class="metric-item">
             <div class="metric-label">Program Status</div>
-            <div class="metric-value">Founding Cohort Open</div>
+            <div class="metric-value" id="heroStatusMetric">Founding Cohort Open</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Institutional Capabilities -->
     <section id="capabilities">
       <div class="container">
         <div class="section-header">
@@ -701,7 +765,6 @@
       </div>
     </section>
 
-    <!-- Digital Private Banking & Founder Card -->
     <section id="digital-desk">
       <div class="container">
         <div class="desk-layout">
@@ -709,40 +772,71 @@
             <div class="section-kicker">Digital Private Environment</div>
             <h2>The Founder Edition Interface.</h2>
             <p class="section-sub">
-              Explore our interactive client portal prototype—built to preview multi-currency liquidity requests, tranche allocation views, and direct desk communications.
+              Interact with our 3D Founder credential and synchronized client portal—built to preview multi-currency liquidity staging, allocation telemetry, and direct desk workflows.
             </p>
 
             <ul class="feature-list">
               <li><span>Allocation &amp; Vault Telemetry</span><strong>Real-Time Preview</strong></li>
               <li><span>Liquidity &amp; Transfer Staging</span><strong>EUR / USD Rails</strong></li>
-              <li><span>Principal Credential</span><strong>Founder Edition</strong></li>
+              <li><span>Principal Credential</span><strong>3D Founder Metal</strong></li>
               <li><span>Direct Desk Routing</span><strong>24/7 Priority Queue</strong></li>
             </ul>
 
-            <a href="app.html" class="btn-primary">Launch Client Portal Preview &rarr;</a>
+            <a href="app.html" class="btn-primary">Launch Synchronized Portal &rarr;</a>
           </div>
 
-          <div>
-            <div class="founder-card-visual">
-              <div class="card-top">
-                <span class="card-issuer">D. STAMOS &amp; CO.</span>
-                <span class="card-tier">Founder Edition</span>
-              </div>
-              <div class="card-chip"></div>
-              <div class="card-bottom">
-                <div>
-                  <div style="font-size:0.62rem;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:3px;">Private Principal</div>
-                  <div class="card-holder">Founding Member</div>
+          <div class="card-stage">
+            <div class="card-3d-scene" id="homeCard3D" title="Tap or click to flip card">
+              <div class="card-3d-inner" id="homeCardInner">
+                <!-- FRONT -->
+                <div class="card-face card-front">
+                  <div class="card-top">
+                    <span class="card-issuer">D. STAMOS &amp; CO.</span>
+                    <span class="card-tier">Founder Edition</span>
+                  </div>
+                  <div class="card-mid">
+                    <div class="card-chip"></div>
+                    <div class="card-serial" id="previewCardSerial">FC &bull; 0001 &bull; ATH</div>
+                  </div>
+                  <div class="card-bottom">
+                    <div>
+                      <div class="card-holder-label">Private Principal</div>
+                      <div class="card-holder" id="previewCardHolder">Founding Member</div>
+                    </div>
+                    <div class="card-jurisdiction">Athens &bull; Private Desk</div>
+                  </div>
                 </div>
-                <div class="card-jurisdiction">Athens &bull; Private Desk</div>
+
+                <!-- BACK -->
+                <div class="card-face card-back">
+                  <div class="mag-stripe"></div>
+                  <div class="card-back-body">
+                    <div class="sig-band">
+                      <span style="font-size:0.58rem;color:var(--text-muted);letter-spacing:0.14em;">CODE</span>
+                      <span id="previewCardCode">STAMOS-ATH-001</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+                      <div style="font-size:0.62rem;color:var(--text-secondary);letter-spacing:0.1em;max-width:210px;">
+                        CONCEPT CREDENTIAL &bull; PRIVATE WEALTH ARCHITECTURE
+                      </div>
+                      <div style="font-family:'Cinzel',serif;font-size:0.68rem;color:var(--gold-light);letter-spacing:0.14em;">
+                        ATHENS DESK
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
+
+            <div class="card-controls">
+              <span>Tilt or tap card</span>
+              <button type="button" class="btn-flip" id="homeFlipBtn">Flip Card &harr;</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Footprint & Priority Access Form -->
     <section id="footprint">
       <div class="container">
         <div class="access-grid" id="access">
@@ -755,16 +849,16 @@
 
             <div class="office-meta">
               <div><strong style="color:var(--text-primary);">Desk Location:</strong> Glyfada, Athens, Greece</div>
-              <div><strong style="color:var(--text-primary);">Onboarding Model:</strong> Priority Waitlist &amp; Invite Code</div>
-              <div><strong style="color:var(--text-primary);">Portal Access:</strong> <a href="app.html" style="color:var(--gold-light);text-decoration:none;">app.html (Interactive Preview)</a></div>
+              <div><strong style="color:var(--text-primary);">Onboarding Model:</strong> Priority Waitlist &amp; Invite Link</div>
+              <div><strong style="color:var(--text-primary);">Portal Sync:</strong> <a href="app.html" style="color:var(--gold-light);text-decoration:none;">Connected to Client Portal &rarr;</a></div>
             </div>
           </div>
 
           <div class="form-box">
             <div class="section-kicker">Founding Cohort Registration</div>
-            <h3 style="font-family:'Cinzel',serif;font-size:1.3rem;margin-bottom:6px;">Request Private Access &amp; Invite Link</h3>
+            <h3 style="font-family:'Cinzel',serif;font-size:1.28rem;margin-bottom:6px;">Request Private Access &amp; Invite Link</h3>
             <p style="color:var(--text-secondary);font-size:0.86rem;margin-bottom:18px;">
-              Join the waitlist and receive your personal invite link to move up the priority queue.
+              Register once to personalize your 3D Founder Card inside the portal and generate your priority invite link.
             </p>
 
             <form id="accessForm" action="https://formspree.io/f/xyewdgbk" method="POST">
@@ -791,22 +885,22 @@
                 </select>
               </div>
 
-              <button type="submit" class="btn-primary" style="width:100%;" id="submitBtn">Join Waitlist &amp; Get Invite Link</button>
+              <button type="submit" class="btn-primary" style="width:100%;" id="submitBtn">Join Waitlist &amp; Sync Portal</button>
               <div class="form-status" id="formStatus"></div>
 
               <div class="invite-box" id="inviteBox">
-                <div style="font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-light);">
+                <div style="font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-light);">
                   Your Personal Priority Invite Link
                 </div>
-                <p style="font-size:0.84rem;color:var(--text-secondary);margin-top:4px;">
-                  Share this link with friends or peers to climb the Founding Cohort queue:
+                <p style="font-size:0.83rem;color:var(--text-secondary);margin-top:4px;">
+                  Share this link to move up the Founding Cohort queue:
                 </p>
                 <div class="invite-link-row">
                   <input type="text" id="inviteLinkField" class="invite-link-input" readonly />
                   <button type="button" class="btn-copy" id="copyInviteBtn">Copy Link</button>
                 </div>
                 <div style="margin-top:12px;">
-                  <a href="app.html" style="color:var(--gold-light);font-size:0.84rem;text-decoration:underline;">Open Client Portal Preview &rarr;</a>
+                  <a href="app.html" style="color:var(--gold-light);font-size:0.84rem;font-weight:500;text-decoration:underline;">Enter Your Personalized Client Portal &rarr;</a>
                 </div>
               </div>
             </form>
@@ -847,20 +941,72 @@
     const invitedByInput = document.getElementById('invitedByInput');
     const referralCodeInput = document.getElementById('referralCodeInput');
 
-    // Detect ?ref= parameter if someone opened via an invite link
+    // 3D Tilt & Flip
+    const card3dScene = document.getElementById('homeCard3D');
+    const card3dInner = document.getElementById('homeCardInner');
+    const flipBtn = document.getElementById('homeFlipBtn');
+    let isFlipped = false;
+    let tiltX = 0;
+    let tiltY = 0;
+
+    function applyCardTransform() {
+      const flipDeg = isFlipped ? 180 : 0;
+      card3dInner.style.transform = `rotateY(${flipDeg + tiltY}deg) rotateX(${tiltX}deg)`;
+    }
+
+    function toggleFlip() {
+      isFlipped = !isFlipped;
+      applyCardTransform();
+    }
+
+    card3dScene.addEventListener('click', toggleFlip);
+    flipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleFlip();
+    });
+
+    card3dScene.addEventListener('mousemove', (e) => {
+      const rect = card3dScene.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      tiltY = nx * 16;
+      tiltX = -ny * 12;
+      applyCardTransform();
+    });
+
+    card3dScene.addEventListener('mouseleave', () => {
+      tiltX = 0;
+      tiltY = 0;
+      applyCardTransform();
+    });
+
+    // Referral & Profile Backup
     const urlParams = new URLSearchParams(window.location.search);
     const refFromUrl = urlParams.get('ref');
     if (refFromUrl) {
       invitedByInput.value = refFromUrl;
+      localStorage.setItem('stamos_referred_by', refFromUrl);
     }
 
     function makeSlug(str) {
-      return str
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '') || 'member';
+      return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'principal';
     }
+
+    function hydrateExistingMember() {
+      const saved = JSON.parse(localStorage.getItem('stamos_member_profile') || 'null');
+      if (!saved) return;
+
+      document.getElementById('previewCardHolder').textContent = saved.name;
+      document.getElementById('previewCardSerial').textContent = 'FC \u2022 ' + String(saved.queueSpot).padStart(4, '0') + ' \u2022 ATH';
+      document.getElementById('previewCardCode').textContent = saved.userCode.toUpperCase();
+      document.getElementById('heroStatusMetric').textContent = 'Queue #' + saved.queueSpot;
+      document.getElementById('navPortalBtn').textContent = saved.name.split(' ')[0] + ' \u2022 Portal \u2192';
+
+      inviteLinkField.value = saved.inviteUrl;
+      inviteBox.style.display = 'block';
+    }
+
+    hydrateExistingMember();
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -872,7 +1018,7 @@
       referralCodeInput.value = userCode;
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Registering...';
+      submitBtn.textContent = 'Synchronizing...';
 
       const formData = new FormData(form);
 
@@ -885,35 +1031,36 @@
 
         const baseUrl = window.location.origin + window.location.pathname;
         const personalInviteUrl = baseUrl + '?ref=' + encodeURIComponent(userCode);
-        const queueSpot = Math.max(12, 1840 - (JSON.parse(localStorage.getItem('stamos_inquiries') || '[]').length * 17));
+        const queueSpot = Math.floor(140 + Math.random() * 480);
 
-        const existing = JSON.parse(localStorage.getItem('stamos_inquiries') || '[]');
-        existing.push({
+        const profile = {
           name,
           email,
           interest,
           userCode,
+          inviteUrl: personalInviteUrl,
+          queueSpot,
           invitedBy: invitedByInput.value,
-          submittedAt: new Date().toISOString()
-        });
-        localStorage.setItem('stamos_inquiries', JSON.stringify(existing));
+          registeredAt: new Date().toISOString()
+        };
+
+        localStorage.setItem('stamos_member_profile', JSON.stringify(profile));
+        hydrateExistingMember();
 
         statusBox.style.display = 'block';
         if (res.ok) {
-          statusBox.innerHTML = '<strong>Confirmed:</strong> ' + name + ', you are registered (Queue Est. <strong>#' + queueSpot + '</strong>) under <em>' + interest + '</em>.';
+          statusBox.innerHTML = '<strong>Synchronized:</strong> ' + name + ', your profile is active (Queue <strong>#' + queueSpot + '</strong>) and synced with the Client Portal.';
         } else {
-          statusBox.innerHTML = '<strong>Recorded Locally:</strong> ' + name + ', your entry is saved (Queue Est. <strong>#' + queueSpot + '</strong>). Check Formspree verification if email delivery is pending.';
+          statusBox.innerHTML = '<strong>Profile Synced:</strong> ' + name + ' (Queue <strong>#' + queueSpot + '</strong>). Your Client Portal is now personalized.';
         }
 
-        inviteLinkField.value = personalInviteUrl;
-        inviteBox.style.display = 'block';
         form.reset();
       } catch (err) {
         statusBox.style.display = 'block';
-        statusBox.innerHTML = '<strong>Connection Note:</strong> Could not reach Formspree right now. Please try again in a moment.';
+        statusBox.innerHTML = '<strong>Connection Note:</strong> Network issue reaching Formspree. Please try again.';
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Join Waitlist & Get Invite Link';
+        submitBtn.textContent = 'Join Waitlist & Sync Portal';
       }
     });
 
@@ -932,5 +1079,3 @@
   </script>
 </body>
 </html>
-
-            
