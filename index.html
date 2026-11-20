@@ -1,196 +1,816 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>D. STAMOS & CO. | Ιδιωτική Χρηματοοικονομική Πλατφόρμα</title>
+  <title>D. STAMOS & CO. | Private Wealth & Capital Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background-color: #090b10;
-      color: #f3f4f6;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
+    :root {
+      --bg-primary: #07080a;
+      --bg-secondary: #0d0f13;
+      --bg-card: #11141a;
+      --border-subtle: rgba(212, 175, 55, 0.16);
+      --border-strong: rgba(212, 175, 55, 0.42);
+      --gold: #d4af37;
+      --gold-light: #f1d882;
+      --text-primary: #f4f5f7;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
     }
-    .container { max-width: 1050px; margin: 0 auto; padding: 0 24px; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
     header {
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(212, 175, 85, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 8, 10, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: var(--text-primary);
+    }
+
+    .brand-sub {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: none;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-portal {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border: 1px solid var(--border-strong);
+      background: rgba(212, 175, 55, 0.08);
+      color: var(--gold-light);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-portal:hover {
+      background: var(--gold);
+      color: #07080a;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 72px 20px 64px;
+      background:
+        radial-gradient(circle at 80% 15%, rgba(212, 175, 55, 0.09), transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(212, 175, 55, 0.05), transparent 40%),
+        var(--bg-primary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 12px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+      background: rgba(212, 175, 55, 0.04);
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5.2vw, 3.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: 0.03em;
+      max-width: 860px;
+      margin-bottom: 22px;
+    }
+
+    h1 span {
+      color: var(--gold-light);
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 640px;
+      margin-bottom: 34px;
+      font-weight: 300;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 52px;
+    }
+
+    .btn-primary {
+      padding: 14px 26px;
+      background: linear-gradient(135deg, var(--gold), #b89124);
+      color: #07080a;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-secondary {
+      padding: 14px 26px;
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    /* Institutional Metrics Strip */
+    .metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .metric-item {
+      padding: 12px 0;
+    }
+
+    .metric-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    /* Sections */
+    section {
+      padding: 68px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      color: var(--text-secondary);
+      max-width: 620px;
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    /* Pillars Grid (GSAM + JPM Style) */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .pillar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 28px 24px;
+      border-radius: 4px;
+      transition: border-color 0.25s;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .pillar-num {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 14px;
+    }
+
+    .pillar-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .pillar-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    /* Digital Desk & Founder Card Preview (BankPro Style) */
+    .desk-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .founder-card-visual {
+      background: linear-gradient(145deg, #17191f 0%, #090a0d 60%, #1a150b 100%);
+      border: 1px solid var(--border-strong);
+      border-radius: 14px;
+      padding: 28px 24px;
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .founder-card-visual::after {
+      content: "";
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 36px;
     }
-    .logo {
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: #d4af55;
+
+    .card-issuer {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      color: var(--gold-light);
     }
-    .badge {
-      font-size: 0.75rem;
-      letter-spacing: 1.5px;
+
+    .card-tier {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #d4af55;
-      border: 1px solid rgba(212, 175, 85, 0.4);
-      padding: 6px 14px;
-      border-radius: 20px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      padding: 4px 8px;
+      border-radius: 2px;
     }
-    .hero {
-      padding: 90px 0 70px;
-      text-align: center;
+
+    .card-chip {
+      width: 40px;
+      height: 28px;
+      border-radius: 5px;
+      background: linear-gradient(135deg, #e7c96b, #9c7a1c);
+      margin-bottom: 28px;
+      opacity: 0.9;
     }
-    .hero h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: -0.5px;
-    }
-    .hero h1 span { color: #d4af55; }
-    .hero p {
-      max-width: 680px;
-      margin: 0 auto 36px;
-      color: #9ca3af;
-      font-size: 1.1rem;
-    }
-    .waitlist-box {
-      background: #11151f;
-      border: 1px solid rgba(212, 175, 85, 0.35);
-      border-radius: 14px;
-      padding: 28px;
-      max-width: 540px;
-      margin: 0 auto;
-    }
-    .waitlist-box form {
+
+    .card-bottom {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .card-holder {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .card-jurisdiction {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 22px 0 28px;
+    }
+
+    .feature-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      display: flex;
+      justify-content: space-between;
       gap: 12px;
     }
-    .waitlist-box input, .waitlist-box select {
-      padding: 14px 16px;
-      border-radius: 8px;
-      border: 1px solid #262d3d;
-      background: #090b10;
-      color: #fff;
-      font-size: 1rem;
+
+    .feature-list li strong {
+      color: var(--text-primary);
+      font-weight: 500;
     }
-    .waitlist-box button {
-      padding: 15px;
-      border-radius: 8px;
-      border: none;
-      background: linear-gradient(135deg, #d4af55, #b58e36);
-      color: #090b10;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      letter-spacing: 0.5px;
-    }
-    .waitlist-box button:hover { opacity: 0.92; }
-    .grid {
+
+    /* Footprint & Access Form */
+    .access-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin: 60px 0;
+      grid-template-columns: 1fr;
+      gap: 32px;
     }
-    .card {
-      background: #11151f;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 14px;
-      padding: 28px;
+
+    .office-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      padding: 28px 24px;
+      border-radius: 4px;
     }
-    .card h3 { color: #d4af55; margin-bottom: 10px; font-size: 1.15rem; }
-    .card p { color: #9ca3af; font-size: 0.96rem; }
-    .card-preview {
-      margin: 70px auto;
-      max-width: 380px;
-      height: 225px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #161b26 0%, #07090d 100%);
-      border: 1px solid rgba(212, 175, 85, 0.55);
-      padding: 26px;
+
+    .office-box h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      color: var(--gold-light);
+    }
+
+    .office-meta {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .office-meta div {
+      margin-bottom: 8px;
+    }
+
+    .form-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      padding: 28px 24px;
+      border-radius: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      background: #07080a;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-primary);
+      border-radius: 3px;
+      font-family: inherit;
+      font-size: 0.92rem;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .form-status {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      display: none;
+      padding: 10px 12px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid var(--border-subtle);
+      border-radius: 3px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 42px 20px 54px;
+      background: #050608;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    .footer-top {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 20px;
     }
-    .card-top { display: flex; justify-content: space-between; align-items: center; }
-    .chip { width: 42px; height: 30px; border-radius: 6px; background: linear-gradient(135deg, #e6c675, #9c7828); }
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 36px 0;
-      text-align: center;
-      color: #6b7280;
-      font-size: 0.82rem;
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
     }
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2rem; }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .disclosure {
+      line-height: 1.65;
+      max-width: 920px;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+      .metrics-strip {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .pillars-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .desk-layout {
+        grid-template-columns: 1fr 1fr;
+      }
+      .access-grid {
+        grid-template-columns: 1fr 1.2fr;
+      }
+      .footer-top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="logo">D. STAMOS &amp; CO.</div>
-      <div class="badge">Private Early Access</div>
-    </header>
 
-    <section class="hero">
-      <h1>Η νέα εποχή στην <span>ταχύτητα</span> και τη <span>ρευστότητα</span>.</h1>
-      <p>
-        Ξέχνα τις αργές διαδικασίες, τις ουρές και τα ψιλά γράμματα. 
-        Η πλατφόρμα <strong>D. Stamos &amp; Co.</strong> σχεδιάζεται για επαγγελματίες, επιχειρήσεις και ιδιώτες 
-        που απαιτούν άμεση κίνηση κεφαλαίων, καθαρούς όρους και πραγματικό όφελος σε κάθε συναλλαγή.
-      </p>
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <span class="brand-title">D. STAMOS &amp; CO.</span>
+        <span class="brand-sub">Private Wealth &amp; Capital Desk</span>
+      </a>
 
-      <div class="waitlist-box">
-        <form onsubmit="event.preventDefault(); document.getElementById('msg').style.display='block';">
-          <input type="text" placeholder="Ονοματεπώνυμο" required />
-          <input type="email" placeholder="Email επικοινωνίας" required />
-          <select>
-            <option value="business">Επαγγελματίας / Επιχείρηση</option>
-            <option value="individual">Ιδιώτης</option>
-          </select>
-          <button type="submit">ΖΗΤΗΣΕ ΠΡΟΣΚΛΗΣΗ ΠΡΟΤΕΡΑΙΟΤΗΤΑΣ</button>
-        </form>
-        <p id="msg" style="display:none; color:#d4af55; margin-top:14px; font-size:0.95rem;">
-          Η αίτησή σου καταχωρήθηκε στη λίστα προτεραιότητας του D. Stamos &amp; Co.
-        </p>
-      </div>
-    </section>
+      <nav class="nav-links">
+        <a href="#mandate">Mandate</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#digital-desk">Digital Desk</a>
+        <a href="#footprint">Athens &amp; Access</a>
+      </nav>
 
-    <div class="card-preview">
-      <div class="card-top">
-        <span style="color:#d4af55; font-weight:700; letter-spacing:2px;">D. STAMOS &amp; CO.</span>
-        <span style="color:#9ca3af; font-size:0.75rem; letter-spacing:1px;">FOUNDER EDITION</span>
-      </div>
-      <div class="chip"></div>
-      <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-        <span style="color:#9ca3af; font-size:0.8rem; letter-spacing:2px;">PRIVATE MEMBER</span>
-        <span style="color:#d4af55; font-size:0.85rem;">PLATINUM</span>
+      <div class="nav-actions">
+        <a href="app.html" class="btn-portal">Client Portal &rarr;</a>
       </div>
     </div>
+  </header>
 
-    <section class="grid">
-      <div class="card">
-        <h3>01. Άμεση Ρευστότητα</h3>
-        <p>Λύση για επαγγελματίες και επιχειρήσεις που δεν αντέχουν να περιμένουν εβδομάδες για να κινηθεί το ταμείο τους.</p>
-      </div>
-      <div class="card">
-        <h3>02. Επιστροφή Αξίας</h3>
-        <p>Έξυπνο δίκτυο συνεργασιών όπου μέρος των συναλλαγών επιστρέφει απευθείας στον χρήστη, χωρίς κρυφές παγίδες.</p>
-      </div>
-      <div class="card">
-        <h3>03. Ανθρώπινη Εξυπηρέτηση</h3>
-        <p>Άμεση επικοινωνία με εξειδικευμένη ομάδα όταν χρειάζεσαι λύση — όχι ατέρμονα αυτοματοποιημένα μηνύματα.</p>
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="mandate">
+      <div class="container">
+        <div class="eyebrow">Athens &bull; Private Client &amp; Institutional Concept</div>
+        <h1>Disciplined Capital Architecture for <span>Private Principals.</span></h1>
+        <p class="hero-desc">
+          D. STAMOS &amp; CO. brings together institutional portfolio discipline, cross-border liquidity workflows, and bespoke private client access within a unified digital architecture.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#access" class="btn-primary">Request Private Briefing</a>
+          <a href="app.html" class="btn-secondary">Enter Portal Preview</a>
+        </div>
+
+        <div class="metrics-strip">
+          <div class="metric-item">
+            <div class="metric-label">Primary Jurisdiction</div>
+            <div class="metric-value">Athens, Greece</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Client Segment</div>
+            <div class="metric-value">Principals &amp; Family Offices</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Settlement Rails</div>
+            <div class="metric-value">EUR &bull; USD Multi-Currency</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Program Status</div>
+            <div class="metric-value">Founding Cohort Open</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <footer>
-      <p><strong>D. STAMOS &amp; CO.</strong> — Πλατφόρμα υπό ανάπτυξη (Pre-Launch / Waitlist).</p>
-      <p style="margin-top:6px;">
-        Σημείωση: Η παρούσα ιστοσελίδα αποτελεί παρουσίαση υπό σχεδιασμό και λίστα εκδήλωσης ενδιαφέροντος. 
-        Δεν παρέχονται ακόμη τραπεζικές ή επενδυτικές υπηρεσίες έως την ολοκλήρωση των απαιτούμενων αδειοδοτήσεων.
+    <!-- Institutional Capabilities (GSAM + JPM Style) -->
+    <section id="capabilities">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Core Capabilities</div>
+          <h2>Institutional Rigor. Private Execution.</h2>
+          <p class="section-sub">
+            Structured around long-term capital preservation, selective liquidity deployment, and direct principal-level coverage.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-num">01 / WEALTH ARCHITECTURE</div>
+            <h3>Bespoke Asset Allocation</h3>
+            <p>
+              Multi-asset portfolio structuring designed around liquidity horizons, risk budgets, and disciplined capital compounding across public and private sleeves.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-num">02 / TREASURY &amp; LIQUIDITY</div>
+            <h3>Cross-Border Treasury Desk</h3>
+            <p>
+              Streamlined EUR and USD liquidity staging, treasury reserve workflows, and rapid capital allocation visibility through a single executive interface.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-num">03 / INTERMEDIARY &amp; ADVISORY</div>
+            <h3>Strategic Principal Coverage</h3>
+            <p>
+              Direct desk coordination for entrepreneurs, private holding structures, and family enterprises seeking discrete, high-touch execution.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Digital Private Banking & Founder Card (BankPro Style) -->
+    <section id="digital-desk">
+      <div class="container">
+        <div class="desk-layout">
+          <div>
+            <div class="section-kicker">Digital Private Environment</div>
+            <h2>The Founder Edition Interface.</h2>
+            <p class="section-sub">
+              Explore our interactive client portal prototype—built to preview multi-currency liquidity requests, tranche allocation views, and direct desk communications.
+            </p>
+
+            <ul class="feature-list">
+              <li><span>Allocation &amp; Vault Telemetry</span><strong>Real-Time Preview</strong></li>
+              <li><span>Liquidity &amp; Transfer Staging</span><strong>EUR / USD Rails</strong></li>
+              <li><span>Principal Credential</span><strong>Founder Edition</strong></li>
+              <li><span>Direct Desk Routing</span><strong>24/7 Priority Queue</strong></li>
+            </ul>
+
+            <a href="app.html" class="btn-primary">Launch Client Portal Preview &rarr;</a>
+          </div>
+
+          <div>
+            <div class="founder-card-visual">
+              <div class="card-top">
+                <span class="card-issuer">D. STAMOS &amp; CO.</span>
+                <span class="card-tier">Founder Edition</span>
+              </div>
+              <div class="card-chip"></div>
+              <div class="card-bottom">
+                <div>
+                  <div style="font-size:0.62rem;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:3px;">Private Principal</div>
+                  <div class="card-holder">Founding Member</div>
+                </div>
+                <div class="card-jurisdiction">Athens &bull; Private Desk</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footprint & Priority Access (JPM Greece Style) -->
+    <section id="footprint">
+      <div class="container">
+        <div class="access-grid" id="access">
+          <div class="office-box">
+            <div class="section-kicker">Local Footprint</div>
+            <h3>D. STAMOS &amp; CO. — Greece</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 300;">
+              Anchored in Athens with focus on the Southern Suburbs private enterprise and maritime/hospitality principal community, connecting local capital with international standards.
+            </p>
+
+            <div class="office-meta">
+              <div><strong style="color:var(--text-primary);">Desk Location:</strong> Glyfada, Athens, Greece</div>
+              <div><strong style="color:var(--text-primary);">Coverage:</strong> Private Principals &amp; Strategic Partners</div>
+              <div><strong style="color:var(--text-primary);">Portal Access:</strong> <a href="app.html" style="color:var(--gold-light);text-decoration:none;">app.html (Interactive Preview)</a></div>
+            </div>
+          </div>
+
+          <div class="form-box">
+            <div class="section-kicker">Founding Cohort Registration</div>
+            <h3 style="font-family:'Cinzel',serif;font-size:1.3rem;margin-bottom:6px;">Request Private Access</h3>
+            <p style="color:var(--text-secondary);font-size:0.86rem;margin-bottom:18px;">
+              Submit your details to register interest for the upcoming D. STAMOS &amp; CO. private onboarding cycle.
+            </p>
+
+            <form id="accessForm">
+              <div class="form-group">
+                <label for="fullName">Full Name / Principal</label>
+                <input type="text" id="fullName" placeholder="e.g. Alexandros Papadopoulos" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Private or Corporate Email</label>
+                <input type="email" id="email" placeholder="name@domain.com" required />
+              </div>
+
+              <div class="form-group">
+                <label for="interest">Primary Area of Interest</label>
+                <select id="interest">
+                  <option value="Private Wealth & Asset Allocation">Private Wealth &amp; Asset Allocation</option>
+                  <option value="Treasury & Multi-Currency Liquidity">Treasury &amp; Multi-Currency Liquidity</option>
+                  <option value="Founder Edition Access">Founder Edition Access</option>
+                  <option value="Strategic Partnership">Strategic Partnership</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-primary" style="width:100%;">Submit Priority Inquiry</button>
+              <div class="form-status" id="formStatus"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <span class="brand-title" style="font-size:0.95rem;">D. STAMOS &amp; CO.</span>
+          <span style="margin-left:10px;">&copy; 2026 All Rights Reserved.</span>
+        </div>
+        <div class="footer-links">
+          <a href="#mandate">Mandate</a>
+          <a href="#capabilities">Capabilities</a>
+          <a href="#digital-desk">Digital Desk</a>
+          <a href="app.html">Client Portal</a>
+        </div>
+      </div>
+
+      <p class="disclosure">
+        <strong>Important Notice &amp; Pre-Launch Disclosure:</strong> D. STAMOS &amp; CO. is currently presented as a private concept, brand architecture, and interactive digital portal preview. Neither this website nor the accompanying portal prototype constitutes a licensed bank, credit institution, investment firm, or regulated financial service provider, nor does it solicit deposits, custody client funds, or offer investment advice. All figures, cards, and workflows displayed in the portal preview are illustrative demonstrations only.
       </p>
-    </footer>
-  </div>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('accessForm');
+    const statusBox = document.getElementById('formStatus');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const interest = document.getElementById('interest').value;
+
+      const entry = {
+        name,
+        email,
+        interest,
+        submittedAt: new Date().toISOString()
+      };
+
+      const existing = JSON.parse(localStorage.getItem('stamos_inquiries') || '[]');
+      existing.push(entry);
+      localStorage.setItem('stamos_inquiries', JSON.stringify(existing));
+
+      statusBox.style.display = 'block';
+      statusBox.innerHTML = '<strong>Inquiry Recorded:</strong> Thank you, ' + name + '. Your request under <em>' + interest + '</em> has been logged for review. You may now explore the <a href="app.html" style="color:#f1d882;text-decoration:underline;">Client Portal Preview</a>.';
+      form.reset();
+    });
+  </script>
 </body>
 </html>
