@@ -44,6 +44,34 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       position: relative;
+      padding-top: 38px;
+    }
+
+    /* Fixed Top Cohort Bar Stuck Directly Above Menu Bar */
+    .stamos-top-sticky-queue {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 38px;
+      z-index: 120;
+      background: rgba(6, 7, 10, 0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      font-size: 0.72rem;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stamos-top-sticky-queue strong {
+      color: var(--gold-light);
+      font-weight: 600;
     }
 
     /* Subtle Wall Street Charging Bull & Institutional Crest Watermark */
@@ -74,7 +102,7 @@
     /* Navigation */
     header {
       position: sticky;
-      top: 0;
+      top: 38px;
       z-index: 100;
       background: rgba(6, 7, 10, 0.88);
       backdrop-filter: blur(18px);
@@ -677,6 +705,10 @@
 </head>
 <body>
 
+  <div class="stamos-top-sticky-queue" id="stamosTopQueueBar">
+    <span id="stamosTopQueueText">Cohort (Max 200) • <strong>43/200</strong> μέσα • Επόμενη θέση: <strong>#44</strong></span>
+  </div>
+
   <!-- Subtle Wall Street Bull & Institutional Architecture Watermark -->
   <div class="bull-backdrop" aria-hidden="true">
     <svg viewBox="0 0 800 460" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -942,6 +974,47 @@
   </footer>
 
   <script>
+    const MAX_COHORT = 200;
+    const BASE_CLAIMED = 43;
+
+    function getClaimedCount() {
+      const saved = parseInt(localStorage.getItem('stamos_200_claimed'), 10);
+      if (isNaN(saved) || saved < BASE_CLAIMED) {
+        localStorage.setItem('stamos_200_claimed', String(BASE_CLAIMED));
+        return BASE_CLAIMED;
+      }
+      return Math.min(saved, MAX_COHORT);
+    }
+
+    function claimNextCohortSpot() {
+      const existing = parseInt(localStorage.getItem('stamos_200_my_spot'), 10);
+      if (!isNaN(existing) && existing >= BASE_CLAIMED + 1) {
+        return existing;
+      }
+      let current = getClaimedCount();
+      if (current < MAX_COHORT) {
+        current += 1;
+        localStorage.setItem('stamos_200_claimed', String(current));
+        localStorage.setItem('stamos_200_my_spot', String(current));
+        return current;
+      }
+      return MAX_COHORT;
+    }
+
+    function updateTopCohortBar() {
+      const claimed = getClaimedCount();
+      const mySpot = parseInt(localStorage.getItem('stamos_200_my_spot'), 10);
+      const topTextEl = document.getElementById('stamosTopQueueText');
+      if (!topTextEl) return;
+
+      if (!isNaN(mySpot) && mySpot >= BASE_CLAIMED + 1) {
+        topTextEl.innerHTML = 'Cohort (Max 200) • <strong>' + claimed + '/200</strong> μέσα • Είσαι στη θέση <strong>#' + mySpot + '</strong>';
+      } else {
+        const nextSpot = Math.min(MAX_COHORT, claimed + 1);
+        topTextEl.innerHTML = 'Cohort (Max 200) • <strong>' + claimed + '/200</strong> μέσα • Επόμενη θέση: <strong>#' + nextSpot + '</strong>';
+      }
+    }
+
     const form = document.getElementById('accessForm');
     const statusBox = document.getElementById('formStatus');
     const inviteBox = document.getElementById('inviteBox');
@@ -1002,6 +1075,7 @@
 
     function hydrateExistingMember() {
       const saved = JSON.parse(localStorage.getItem('stamos_member_profile') || 'null');
+      updateTopCohortBar();
       if (!saved) return;
 
       document.getElementById('previewCardHolder').textContent = saved.name;
@@ -1039,7 +1113,7 @@
 
         const baseUrl = window.location.origin + window.location.pathname;
         const personalInviteUrl = baseUrl + '?ref=' + encodeURIComponent(userCode);
-        const queueSpot = Math.floor(140 + Math.random() * 480);
+        const queueSpot = claimNextCohortSpot();
 
         const profile = {
           name,
@@ -1087,77 +1161,3 @@
   </script>
 </body>
 </html>
-<div id="stamos-live-queue-bar" style="position:fixed;bottom:16px;right:16px;z-index:9999;background:rgba(10,12,16,0.92);color:#f4f1ea;border:1px solid rgba(212,175,55,0.45);border-radius:12px;padding:12px 16px;font-family:Inter,sans-serif;font-size:13px;backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,0.45);max-width:320px;">
-  <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;">
-    <span style="color:#d4af37;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;font-size:11px;">Founding Cohort (Max 200)</span>
-    <span id="stamos-claimed-count" style="font-weight:600;">43 / 200</span>
-  </div>
-  <div id="stamos-user-position-text" style="margin-top:6px;color:#e5e7eb;font-size:12px;">
-    Ήδη 43 θέσεις κατειλημμένες — ελεύθερες: <strong id="stamos-remaining-count">157</strong>.
-  </div>
-</div>
-
-<script>
-(function () {
-  const MAX_SPOTS = 200;
-  const INITIAL_CLAIMED = 43;
-
-  function getClaimed() {
-    const saved = parseInt(localStorage.getItem("stamos_200_claimed"), 10);
-    if (isNaN(saved) || saved < INITIAL_CLAIMED) {
-      localStorage.setItem("stamos_200_claimed", String(INITIAL_CLAIMED));
-      return INITIAL_CLAIMED;
-    }
-    return Math.min(saved, MAX_SPOTS);
-  }
-
-  function renderQueueStatus(assignedSpot) {
-    const claimed = getClaimed();
-    const remaining = Math.max(0, MAX_SPOTS - claimed);
-
-    const claimedEl = document.getElementById("stamos-claimed-count");
-    const remainingEl = document.getElementById("stamos-remaining-count");
-    const posTextEl = document.getElementById("stamos-user-position-text");
-
-    if (claimedEl) claimedEl.textContent = claimed + " / " + MAX_SPOTS;
-    if (remainingEl) remainingEl.textContent = String(remaining);
-
-    const mySavedSpot = assignedSpot || parseInt(localStorage.getItem("stamos_200_my_spot"), 10);
-    if (posTextEl) {
-      if (mySavedSpot) {
-        posTextEl.innerHTML =
-          "Είσαι στη θέση <strong style='color:#d4af37;'>#" + mySavedSpot + "</strong> από " + MAX_SPOTS +
-          " • Απομένουν: <strong>" + remaining + "</strong>";
-      } else {
-        posTextEl.innerHTML =
-          "Ήδη <strong>" + claimed + "</strong> μέσα • Επόμενη θέση: <strong style='color:#d4af37;'>#" + (claimed + 1) + "</strong> (Μένουν " + remaining + ")";
-      }
-    }
-  }
-
-  function claimNextSpot() {
-    let mySpot = parseInt(localStorage.getItem("stamos_200_my_spot"), 10);
-    if (!mySpot) {
-      let currentClaimed = getClaimed();
-      if (currentClaimed < MAX_SPOTS) {
-        currentClaimed += 1;
-        mySpot = currentClaimed;
-        localStorage.setItem("stamos_200_claimed", String(currentClaimed));
-        localStorage.setItem("stamos_200_my_spot", String(mySpot));
-      }
-    }
-    renderQueueStatus(mySpot);
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    renderQueueStatus();
-
-    const forms = document.querySelectorAll("form");
-    forms.forEach(function (form) {
-      form.addEventListener("submit", function () {
-        claimNextSpot();
-      });
-    });
-  });
-})();
-</script>
