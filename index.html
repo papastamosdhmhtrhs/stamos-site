@@ -1087,3 +1087,77 @@
   </script>
 </body>
 </html>
+<div id="stamos-live-queue-bar" style="position:fixed;bottom:16px;right:16px;z-index:9999;background:rgba(10,12,16,0.92);color:#f4f1ea;border:1px solid rgba(212,175,55,0.45);border-radius:12px;padding:12px 16px;font-family:Inter,sans-serif;font-size:13px;backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,0.45);max-width:320px;">
+  <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;">
+    <span style="color:#d4af37;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;font-size:11px;">Founding Cohort (Max 200)</span>
+    <span id="stamos-claimed-count" style="font-weight:600;">43 / 200</span>
+  </div>
+  <div id="stamos-user-position-text" style="margin-top:6px;color:#e5e7eb;font-size:12px;">
+    Ήδη 43 θέσεις κατειλημμένες — ελεύθερες: <strong id="stamos-remaining-count">157</strong>.
+  </div>
+</div>
+
+<script>
+(function () {
+  const MAX_SPOTS = 200;
+  const INITIAL_CLAIMED = 43;
+
+  function getClaimed() {
+    const saved = parseInt(localStorage.getItem("stamos_200_claimed"), 10);
+    if (isNaN(saved) || saved < INITIAL_CLAIMED) {
+      localStorage.setItem("stamos_200_claimed", String(INITIAL_CLAIMED));
+      return INITIAL_CLAIMED;
+    }
+    return Math.min(saved, MAX_SPOTS);
+  }
+
+  function renderQueueStatus(assignedSpot) {
+    const claimed = getClaimed();
+    const remaining = Math.max(0, MAX_SPOTS - claimed);
+
+    const claimedEl = document.getElementById("stamos-claimed-count");
+    const remainingEl = document.getElementById("stamos-remaining-count");
+    const posTextEl = document.getElementById("stamos-user-position-text");
+
+    if (claimedEl) claimedEl.textContent = claimed + " / " + MAX_SPOTS;
+    if (remainingEl) remainingEl.textContent = String(remaining);
+
+    const mySavedSpot = assignedSpot || parseInt(localStorage.getItem("stamos_200_my_spot"), 10);
+    if (posTextEl) {
+      if (mySavedSpot) {
+        posTextEl.innerHTML =
+          "Είσαι στη θέση <strong style='color:#d4af37;'>#" + mySavedSpot + "</strong> από " + MAX_SPOTS +
+          " • Απομένουν: <strong>" + remaining + "</strong>";
+      } else {
+        posTextEl.innerHTML =
+          "Ήδη <strong>" + claimed + "</strong> μέσα • Επόμενη θέση: <strong style='color:#d4af37;'>#" + (claimed + 1) + "</strong> (Μένουν " + remaining + ")";
+      }
+    }
+  }
+
+  function claimNextSpot() {
+    let mySpot = parseInt(localStorage.getItem("stamos_200_my_spot"), 10);
+    if (!mySpot) {
+      let currentClaimed = getClaimed();
+      if (currentClaimed < MAX_SPOTS) {
+        currentClaimed += 1;
+        mySpot = currentClaimed;
+        localStorage.setItem("stamos_200_claimed", String(currentClaimed));
+        localStorage.setItem("stamos_200_my_spot", String(mySpot));
+      }
+    }
+    renderQueueStatus(mySpot);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    renderQueueStatus();
+
+    const forms = document.querySelectorAll("form");
+    forms.forEach(function (form) {
+      form.addEventListener("submit", function () {
+        claimNextSpot();
+      });
+    });
+  });
+})();
+</script>
